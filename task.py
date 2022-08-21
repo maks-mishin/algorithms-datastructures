@@ -1,4 +1,4 @@
-def squirell( N ):
+def squirrel( N ):
     factorial = 1
     for i in range(N):
         factorial *= i + 1
