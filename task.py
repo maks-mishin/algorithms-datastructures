@@ -13,16 +13,21 @@ def ConquestCampaign( N, M, L, battalion ):
         y_coord = battalion[i] - 1
         x_coord = battalion[i + 1] - 1
         place_of_arms[y_coord][x_coord] = True
-
         places_already_control.add((y_coord, x_coord))
 
     day_total_control = 1
 
+    flag = True
+    for i in range(N):
+        for j in range(M):
+            flag = flag and place_of_arms[i][j]
+    if flag:
+        return day_total_control
+
     neighbours = [1, -1]
     while True:
-        day_total_control += 1
-
         flag = True
+        day_total_control += 1
         temp_places_already_control = []
 
         for place in places_already_control:
