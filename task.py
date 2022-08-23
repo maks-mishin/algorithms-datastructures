@@ -1,13 +1,11 @@
-def MadMax( N, Tele ):
-    start_pulse = []
-    index_max_elem = Tele.index(max(Tele))
-    max_elem = Tele.pop(index_max_elem)
+def SynchronizingTables( N, ids, salary ):
+    sorted_ids, sorted_salary = sorted(ids), sorted(salary)
+    
+    correct_map_id_salary = {}
+    for i in range(N):
+        correct_map_id_salary[sorted_ids[i]] = sorted_salary[i]
 
-    Tele.sort()
-    left_part = Tele[: N // 2]
-    rigth_part = sorted(Tele[N // 2 :], reverse=True)
-
-    start_pulse.extend(left_part)
-    start_pulse.append(max_elem)
-    start_pulse.extend(rigth_part)
-    return start_pulse
+    correct_salary = []
+    for id_worker in ids:
+        correct_salary.append(correct_map_id_salary[id_worker])
+    return correct_salary
