@@ -1,6 +1,3 @@
-from tracemalloc import start
-
-
 def MadMax( N, Tele ):
     start_pulse = []
     index_max_elem = Tele.index(max(Tele))
