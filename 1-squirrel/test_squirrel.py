@@ -2,6 +2,7 @@ import unittest
 
 from squirrel import squirrel
 
+
 class TestSquirrel(unittest.TestCase):
     def test_squirrel(self):
         self.assertEqual(squirrel(3), 6)

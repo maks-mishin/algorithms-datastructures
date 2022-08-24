@@ -1,4 +1,4 @@
-def odometer( oksana ):
+def odometer(oksana: list) -> int:
     elapsed_time = 0
     distance = 0
     current_velocity = 0

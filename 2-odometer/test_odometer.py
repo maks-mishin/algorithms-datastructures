@@ -2,7 +2,8 @@ import unittest
 
 from odometer import odometer
 
-class TestSquirrel(unittest.TestCase):
+
+class TestOdometer(unittest.TestCase):
     def test_odometer(self):
         self.assertEqual(odometer([10, 1]), 10)
         self.assertEqual(odometer([10, 1, 10, 2, 10, 3]), 30)
