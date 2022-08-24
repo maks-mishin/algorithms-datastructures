@@ -10,7 +10,7 @@ def WordSearch(len_split: int, s: str, subs: str) -> list:
         current_word = source_list_words[i]
 
         if len(current_word) <= len_split:
-            if len(current_string + ' ' + current_word) <= len_split:
+            if len(current_string + current_word) <= len_split:
                 current_string += current_word + ' '
             else:
                 array_after_splitting.append(current_string.strip())
