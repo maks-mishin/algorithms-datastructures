@@ -1,13 +1,8 @@
 def odometer(oksana: list) -> int:
-    elapsed_time = 0
-    distance = 0
-    current_velocity = 0
+    elapsed_time, distance, current_velocity = 0, 0, 0
 
-    for i in range(len(oksana)):
-        if i % 2 == 0:
-            current_velocity = oksana[i]
-        else:
-            delta_time = oksana[i] - elapsed_time
-            elapsed_time = oksana[i]
-            distance += current_velocity * delta_time
+    for i in range(0, len(oksana), 2):
+        current_velocity = oksana[i]
+        delta_time, elapsed_time = oksana[i + 1] - elapsed_time, oksana[i + 1]
+        distance += current_velocity * delta_time
     return distance
