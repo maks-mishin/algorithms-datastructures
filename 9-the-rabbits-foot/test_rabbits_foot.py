@@ -1,4 +1,3 @@
-import random
 import unittest
 
 from rabbits_foot import TheRabbitsFoot
@@ -40,6 +39,7 @@ class TestRabbitsFoot(unittest.TestCase):
         for i in range(len(data)):
             dataset = data[i]
             self.assertEqual(TheRabbitsFoot(dataset[0], False), dataset[1])
+
 
 if __name__ == "__main__":
     unittest.main()
