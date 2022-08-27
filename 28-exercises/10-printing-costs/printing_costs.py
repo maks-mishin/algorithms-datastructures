@@ -16,7 +16,7 @@ ascii_costs = {
 }
 
 
-def get_char_cost(ch):
+def get_char_cost(ch: str) -> int:
     default_cost = 23
     if ch in ascii_costs:
         return ascii_costs[ch]
