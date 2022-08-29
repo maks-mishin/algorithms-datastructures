@@ -16,9 +16,9 @@ def moving_average(timeseries: list, K: int) -> list:
 
 
 class TestMovingAverage(unittest.TestCase):
-    def test_moving_average(self):
-        pass
-
+    def test_examples(self):
+        self.assertEqual(moving_average([4, 3, 8, 1, 5, 6, 3], 3), [5.0, 4.0, 4.67, 4.0, 4.67])
+        
 
 if __name__ == "__main__":
     unittest.main()
