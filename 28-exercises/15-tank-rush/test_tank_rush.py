@@ -3,7 +3,7 @@ import unittest
 from tank_rush import TankRush
 
 
-class TestTrafficLight(unittest.TestCase):
+class TestTankRush(unittest.TestCase):
     def test_examples(self):
         self.assertEqual(TankRush(3, 4, "1234 2345 0987", 2, 2, "34 87"), False)
         self.assertEqual(TankRush(3, 4, "1234 2345 0987", 2, 2, "34 98"), True)
