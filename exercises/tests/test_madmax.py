@@ -1,6 +1,6 @@
 import unittest
 
-from mad_max import MadMax
+from exercises.mad_max import MadMax
 
 
 class TestMadMax(unittest.TestCase):

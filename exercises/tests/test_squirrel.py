@@ -1,6 +1,6 @@
 import unittest
 
-from squirrel import squirrel
+from exercises.squirrel import squirrel
 
 
 class TestSquirrel(unittest.TestCase):

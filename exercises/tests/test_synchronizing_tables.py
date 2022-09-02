@@ -1,6 +1,6 @@
 import unittest
 
-from synchronizing_tables import SynchronizingTables
+from exercises.synchronizing_tables import SynchronizingTables
 
 
 class TestConquestCampaign(unittest.TestCase):

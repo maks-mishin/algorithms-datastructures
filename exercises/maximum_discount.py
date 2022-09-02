@@ -1,9 +1,9 @@
-def MaximumDiscount(N: int, price: list) -> int:
-    if N < 3:
+def MaximumDiscount(things_count: int, price: list) -> int:
+    if things_count < 3:
         return 0
     SET_THINGS = 3
     max_discount_1, max_discount_2 = 0, 0
-    count_free_things = N // 3
+    count_free_things = things_count // 3
     
     price.sort(reverse=True)
     max_discount_1 = sum([price[-i] for i in range(1, count_free_things + 1)])

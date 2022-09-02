@@ -1,7 +1,7 @@
-def check_total_control(N: int, M: int, place_of_arms: list) -> bool:
+def check_total_control(rows: int, columns: int, place_of_arms: list) -> bool:
     flag = True
-    for i in range(N):
-        for j in range(M):
+    for i in range(rows):
+        for j in range(columns):
             flag = flag and place_of_arms[i][j]
     return flag
 

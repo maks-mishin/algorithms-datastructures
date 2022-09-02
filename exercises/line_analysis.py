@@ -6,7 +6,7 @@ def is_template_line(line: str) -> bool:
         if ch == '*':
             template += ch
             break
-    # construct the source line fromby template
+    # construct the source line by template
     constructed_line = '*'
     while len(constructed_line) < len(line):
         constructed_line += template

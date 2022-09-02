@@ -1,6 +1,6 @@
 import unittest
 
-from conquest_campaign import ConquestCampaign
+from exercises.conquest_campaign import ConquestCampaign
 
 
 class TestConquestCampaign(unittest.TestCase):
