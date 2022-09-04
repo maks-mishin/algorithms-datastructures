@@ -1,4 +1,4 @@
-def calc_matrix_size(len_in_string: int) -> int:
+def calc_matrix_size(len_in_string: int) -> tuple:
     sqrt_len = len_in_string ** (1/2)
     is_square_matrix = int(sqrt_len) ** 2 == len_in_string
 

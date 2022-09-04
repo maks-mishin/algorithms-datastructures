@@ -3,15 +3,15 @@ def is_red_light(total_time: int, traffic_light: list) -> tuple:
     traffic_light_time = red_time + green_time
 
     if total_time % traffic_light_time == 0:
-        return (True, red_time)
+        return True, red_time
 
     remain_time = total_time % traffic_light_time
     if remain_time >= red_time:
-        return (False, 0)
-    return (True, red_time - remain_time)
+        return False, 0
+    return True, red_time - remain_time
 
 
-def Unmanned(road_length: int, N: int, track: list) -> int:
+def Unmanned(road_length: int, n: int, track: list) -> int:
     total_time, distance = 0, 0
 
     for traffic_light in track:

@@ -1,8 +1,8 @@
-def SynchronizingTables(N, ids, salary):
+def SynchronizingTables(count: int, ids: list, salary: list) -> list:
     sorted_ids, sorted_salary = sorted(ids), sorted(salary)
 
     correct_map_id_salary = {}
-    for i in range(N):
+    for i in range(count):
         correct_map_id_salary[sorted_ids[i]] = sorted_salary[i]
 
     correct_salary = []

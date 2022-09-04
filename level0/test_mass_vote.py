@@ -1,7 +1,7 @@
 import unittest
 import random
 
-from mass_vote import MassVote
+from tasks.mass_vote import MassVote
 
 
 class TestMassVote(unittest.TestCase):

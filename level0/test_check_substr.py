@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.check_substr import CheckSubstr
+from tasks.check_substr import CheckSubstr
 
 
 class TestCheckSubstr(unittest.TestCase):
@@ -15,7 +15,9 @@ class TestCheckSubstr(unittest.TestCase):
                   False, True, True
                   ]
         for i in range(len(dataset)):
-            self.assertEqual(CheckSubstr(dataset[i], sub_strings[i]), result[i])
+            self.assertEqual(CheckSubstr(
+                dataset[i], sub_strings[i]), result[i]
+            )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 import unittest
 
-from maximum_discount import MaximumDiscount
+from tasks.maximum_discount import MaximumDiscount
 
 
 class TestTankRush(unittest.TestCase):

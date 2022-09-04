@@ -16,7 +16,7 @@ def WordSearch(len_split: int, in_string: str, sub_string: str) -> list:
             if not is_allow_add_word:
                 array_after_splitting.append(current_string.strip())
                 current_string = current_word + ' '
-        
+
         if not len(current_word) <= len_split:
             if current_string != "":
                 array_after_splitting.append(current_string.strip())

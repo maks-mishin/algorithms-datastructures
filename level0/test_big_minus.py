@@ -1,7 +1,7 @@
 import unittest
 import random
 
-from big_minus import BigMinus
+from tasks.big_minus import BigMinus
 
 
 class TestBigMinus(unittest.TestCase):
@@ -16,7 +16,8 @@ class TestBigMinus(unittest.TestCase):
 
     def test_random(self):
         for _ in range(1000):
-            num1, num2 = random.randint(0, 10 ** 16), random.randint(0, 10 ** 16)
+            num1 = random.randint(0, 10 ** 16)
+            num2 = random.randint(0, 10 ** 16)
             result_str = str(abs(num1 - num2))
             self.assertEqual(BigMinus(str(num1), str(num2)), result_str)
 

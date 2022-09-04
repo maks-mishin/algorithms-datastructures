@@ -1,6 +1,6 @@
 import unittest
 
-from unmanned import Unmanned
+from tasks.unmanned import Unmanned
 
 
 class TestTrafficLight(unittest.TestCase):

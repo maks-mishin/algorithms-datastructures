@@ -1,7 +1,7 @@
 import random
 import unittest
 
-from sum_of_the import SumOfThe
+from tasks.sum_of_the import SumOfThe
 
 
 class TestSumOfThe(unittest.TestCase):

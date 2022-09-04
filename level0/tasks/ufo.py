@@ -1,4 +1,4 @@
-def UFO(N: int, data: list, octal: bool) -> list:
+def UFO(n: int, data: list, octal: bool) -> list:
     base = 8 if octal else 16
 
     result = []

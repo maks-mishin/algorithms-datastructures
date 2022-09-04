@@ -1,12 +1,18 @@
 import unittest
 
-from rabbits_foot import TheRabbitsFoot
+from tasks.rabbits_foot import TheRabbitsFoot
 
 
 class TestRabbitsFoot(unittest.TestCase):
     def test_rabbit_foot(self):
-        self.assertEqual(TheRabbitsFoot("отдай мою кроличью лапку", True), "омоюу толл дюиа акчп йрьк")
-        self.assertEqual(TheRabbitsFoot("омоюу толл дюиа акчп йрьк", False), "отдаймоюкроличьюлапку")
+        self.assertEqual(
+            TheRabbitsFoot("отдай мою кроличью лапку", True),
+            "омоюу толл дюиа акчп йрьк"
+        )
+        self.assertEqual(
+            TheRabbitsFoot("омоюу толл дюиа акчп йрьк", False),
+            "отдаймоюкроличьюлапку"
+        )
 
     def test_encrypt(self):
         data = [

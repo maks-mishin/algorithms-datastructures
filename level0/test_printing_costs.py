@@ -1,11 +1,13 @@
 import unittest
 
-from printing_costs import PrintingCosts
+from tasks.printing_costs import PrintingCosts
 
 
 class TestPrintingCosts(unittest.TestCase):
     def test_all_table(self):
-        in_string = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+        in_string = '!"#$%&\'()*+,' \
+                    '-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[' \
+                    '\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ '
         total_cost = 1757
         self.assertEqual(PrintingCosts(in_string), total_cost)
 

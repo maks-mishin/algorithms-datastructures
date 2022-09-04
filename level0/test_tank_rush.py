@@ -1,6 +1,6 @@
 import unittest
 
-from tank_rush import TankRush
+from tasks.tank_rush import TankRush
 
 
 class TestTankRush(unittest.TestCase):

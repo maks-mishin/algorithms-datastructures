@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.odometer import odometer
+from tasks.odometer import odometer
 
 
 class TestOdometer(unittest.TestCase):

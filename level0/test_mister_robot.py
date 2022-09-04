@@ -1,6 +1,6 @@
 import unittest
 
-from exercises.mister_robot import MisterRobot
+from tasks.mister_robot import MisterRobot
 
 
 class TestMisterRobot(unittest.TestCase):
