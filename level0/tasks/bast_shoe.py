@@ -1,50 +1,64 @@
 class TextEditor:
     def __init__(self) -> None:
         self.current_str = ''
-        self.states = []
+        self.states = ['']
         self.last_command = None
-        self.undo_states = []
+        self.position_state = 0
+        self.allow_undo, self.allow_redo = False, False
 
     def add(self, addition_str: str) -> str:
-        self.undo_states = []
-        self.last_command = 'add'
         self.current_str += addition_str
         self.states.append(self.current_str)
+
+        if self.allow_undo:
+            self.allow_undo = False
+            self.current_str = self.states[self.position_state]
+            return self.current_str
+        self.allow_undo = True
+        self.allow_redo = False
+        self.position_state += 1
         return self.current_str
 
     def remove(self, count_remove: int) -> str:
-        self.undo_states = []
-        self.last_command = 'remove'
         if count_remove > len(self.current_str):
             self.current_str = ''
             self.states.append(self.current_str)
-            return ''
+            return self.current_str
         self.current_str = self.current_str[
                            :len(self.current_str) - count_remove
                            ]
         self.states.append(self.current_str)
+
+        if self.allow_undo:
+            self.allow_undo = False
+            self.current_str = self.states[self.position_state]
+            return self.current_str
+        self.allow_undo = True
+        self.allow_redo = False
+        self.position_state += 1
         return self.current_str
 
     def get(self, index: int) -> str:
-        self.last_command = 'get'
         if index >= len(self.current_str):
             return ''
         return self.current_str[index]
 
     def undo(self) -> str:
-        self.last_command = 'undo'
-        self.undo_states.append(self.states.pop())
-        self.current_str = self.states[-1]
+        if not self.allow_undo:
+            return self.current_str
+        self.allow_undo = True
+        self.allow_redo = True
+
+        self.position_state -= 1
         return self.current_str
 
     def redo(self) -> str:
-        if self.last_command == 'undo':
-            self.current_str = self.undo_states.pop(0)
-        self.last_command = 'redo'
+        if not self.allow_redo:
+            return self.current_str
         return self.current_str
 
     def run_command(self, num_command, param) -> str:
-        if num_command not in ['1', '2', '3', '4', 5]:
+        if num_command not in ['1', '2', '3', '4', '5']:
             return self.current_str
         if num_command == '1':
             return self.add(addition_str=param)
@@ -64,3 +78,17 @@ def BastShoe(command: str) -> str:
     num_command = command[0]
     param = command[1:].strip()
     return text_editor.run_command(num_command, param)
+
+
+print(BastShoe('1 Привет'))
+print(BastShoe('1 , Мир!'))
+print(BastShoe('1 ++'))
+print(BastShoe('2 2'))
+print(BastShoe('4'))
+print(BastShoe('4'))
+print(BastShoe('1 *'))
+print(BastShoe('4'))
+print(BastShoe('4'))
+print(BastShoe('4'))
+print(BastShoe('3 6'))
+print(BastShoe('2 100'))
