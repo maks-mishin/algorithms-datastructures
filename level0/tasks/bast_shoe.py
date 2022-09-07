@@ -3,20 +3,18 @@ class TextEditor:
         self.current_str = ''
         self.states = ['']
         self.last_command = None
-        self.position_state = 0
-        self.allow_undo, self.allow_redo = False, False
+        self.count_undo = True
+        self.undo_states = []
 
     def add(self, addition_str: str) -> str:
         self.current_str += addition_str
         self.states.append(self.current_str)
+        self.count_undo += 1
 
-        if self.allow_undo:
-            self.allow_undo = False
-            self.current_str = self.states[self.position_state]
-            return self.current_str
-        self.allow_undo = True
-        self.allow_redo = False
-        self.position_state += 1
+        if self.last_command == 'undo':
+            self.count_undo = 1
+            self.undo_states = []
+        self.last_command = 'add'
         return self.current_str
 
     def remove(self, count_remove: int) -> str:
@@ -24,18 +22,17 @@ class TextEditor:
             self.current_str = ''
             self.states.append(self.current_str)
             return self.current_str
+
         self.current_str = self.current_str[
                            :len(self.current_str) - count_remove
                            ]
         self.states.append(self.current_str)
+        self.count_undo += 1
 
-        if self.allow_undo:
-            self.allow_undo = False
-            self.current_str = self.states[self.position_state]
-            return self.current_str
-        self.allow_undo = True
-        self.allow_redo = False
-        self.position_state += 1
+        if self.last_command == 'undo':
+            self.count_undo = 1
+            self.undo_states = []
+        self.last_command = 'remove'
         return self.current_str
 
     def get(self, index: int) -> str:
@@ -44,17 +41,20 @@ class TextEditor:
         return self.current_str[index]
 
     def undo(self) -> str:
-        if not self.allow_undo:
+        self.last_command = 'undo'
+        if self.count_undo == 0:
             return self.current_str
-        self.allow_undo = True
-        self.allow_redo = True
-
-        self.position_state -= 1
+        self.count_undo -= 1
+        self.undo_states.append(self.states.pop())
+        self.current_str = self.states[-1]
         return self.current_str
 
     def redo(self) -> str:
-        if not self.allow_redo:
+        if self.last_command != 'undo' or not self.undo_states:
             return self.current_str
+        self.count_undo += 1
+        self.current_str = self.undo_states.pop()
+        self.states.append(self.current_str)
         return self.current_str
 
     def run_command(self, num_command, param) -> str:
@@ -78,17 +78,3 @@ def BastShoe(command: str) -> str:
     num_command = command[0]
     param = command[1:].strip()
     return text_editor.run_command(num_command, param)
-
-
-print(BastShoe('1 Привет'))
-print(BastShoe('1 , Мир!'))
-print(BastShoe('1 ++'))
-print(BastShoe('2 2'))
-print(BastShoe('4'))
-print(BastShoe('4'))
-print(BastShoe('1 *'))
-print(BastShoe('4'))
-print(BastShoe('4'))
-print(BastShoe('4'))
-print(BastShoe('3 6'))
-print(BastShoe('2 100'))
