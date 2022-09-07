@@ -46,6 +46,8 @@ class TextEditor:
             return self.current_str
         self.count_undo -= 1
         self.undo_states.append(self.states.pop())
+        if not self.states:
+            return ''
         self.current_str = self.states[-1]
         return self.current_str
 
