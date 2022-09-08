@@ -23,5 +23,7 @@ def BiggerGreater(in_string: str) -> str:
             invocations.add(invocation)
     
     filtered_invocations = list(filter(lambda x: x > in_string, invocations))
+    if not filtered_invocations:
+        return ''
     return sorted(filtered_invocations)[0]
   
