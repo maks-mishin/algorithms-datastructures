@@ -22,8 +22,8 @@ def SherlockValidString(in_string: str) -> bool:
     filter_low = list(filter(lambda x: x == low_frequency, chars_frequency))
     filter_high = list(filter(lambda x: x == high_frequency, chars_frequency))
 
-    if len(filter_low) == 1 and filter_low[0] == 1:
-        return True
-    if len(filter_high) == 1 and filter_high[0] - low_frequency == 1:
-        return True
-    return False
+    is_valid = (
+        len(filter_low) == 1 and filter_low[0] == 1 or
+        len(filter_high) == 1 and filter_high[0] - low_frequency == 1
+    )
+    return is_valid
