@@ -1,7 +1,9 @@
 def rotate_one_step(matrix: list, rows: int, cols: int) -> None:
+    """Rotates the matrix one step clockwise"""
     top, bottom = 0, rows - 1
     left, right = 0, cols - 1
-    
+
+    # we calculate count of rotated layers and then rotate each layer
     count_layers_rotated = int(rows / 2)
     for _ in range(count_layers_rotated):
         top_left = matrix[left][left]
@@ -27,8 +29,10 @@ def rotate_one_step(matrix: list, rows: int, cols: int) -> None:
 
 
 def MatrixTurn(matrix: list, rows: int, cols: int, steps: int) -> None:
+    """Rotates the matrix by the number of steps 'steps'"""
+
     # convert each row to list because of
-    # 'str' object does not suppost item assignment
+    # 'str' object does not support item assignment
     for i, row in enumerate(matrix):
         matrix[i] = list(row)
     
