@@ -46,8 +46,5 @@ class Tree:
 def TreeOfLife(rows: int, cols: int, years: int, layers_list: list) -> list:
     tree = Tree(layers_list)
     for year in range(years):
-        if year % 2 == 0:
-            tree.even_year()
-        if year % 2 != 0:
-            tree.odd_year(rows, cols)
+        tree.even_year() if year % 2 == 0 else tree.odd_year(rows, cols)
     return tree.to_string()

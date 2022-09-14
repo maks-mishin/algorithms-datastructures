@@ -7,16 +7,14 @@ def rotate(sub_list: list) -> list:
 
 
 def MisterRobot(n: int, data: list) -> bool:
-    correct_data = sorted(data)
-    if data == correct_data:
+    if data == sorted(data):
         return True
 
     for j in range(n):
         for i in range(n - 2):
-            sub_list = data[i:i + 3]
-            if sub_list == sorted(data[i:i + 3]):
+            if data[i:i + 3] == sorted(data[i:i + 3]):
                 continue
-            data[i:i + 3] = rotate(sub_list)
-        if data == correct_data:
+            data[i:i + 3] = rotate(data[i:i + 3])
+        if data == sorted(data):
             return True
     return False

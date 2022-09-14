@@ -17,14 +17,12 @@ ascii_costs = {
 
 
 def get_char_cost(ch: str) -> int:
+    """Return printing cost for specific char"""
     default_cost = 23
-    if ch in ascii_costs:
-        return ascii_costs[ch]
-    return default_cost
+    return ascii_costs[ch] if ch in ascii_costs else default_cost
 
 
-def PrintingCosts(in_string: str) -> int:
-    total_print_cost = 0
-    for ch in in_string:
-        total_print_cost += get_char_cost(ch)
-    return total_print_cost
+def PrintingCosts(input_string: str) -> int:
+    """Return total printing cost for given string"""
+    print_cost_list = [get_char_cost(ch) for ch in input_string]
+    return sum(print_cost_list)

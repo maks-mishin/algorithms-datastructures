@@ -77,6 +77,6 @@ text_editor = TextEditor()
 
 
 def BastShoe(command: str) -> str:
-    num_command = command[0]
-    param = command[1:].strip()
+    """Function for run command for management of text editor"""
+    num_command, param = command[0], command[1:].strip()
     return text_editor.run_command(num_command, param)

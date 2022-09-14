@@ -1,4 +1,5 @@
 def odometer(oksana: list) -> int:
+    """Return distance calculated without speedometer"""
     elapsed_time, distance, current_velocity = 0, 0, 0
 
     for i in range(0, len(oksana), 2):

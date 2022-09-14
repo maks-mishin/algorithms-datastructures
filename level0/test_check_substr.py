@@ -1,10 +1,10 @@
 import unittest
 
-from tasks.check_substr import CheckSubstr
+from tasks.check_substr import CheckSubstring
 
 
-class TestCheckSubstr(unittest.TestCase):
-    def test_check_substr(self):
+class TestCheckSubstring(unittest.TestCase):
+    def test_check_substring(self):
         dataset = ['1212', '12114', '1211', '1231233', '000100001000010020003',
                    '', '012030000', '12345', '123', '', '1', '123'
                    ]
@@ -15,7 +15,7 @@ class TestCheckSubstr(unittest.TestCase):
                   False, True, True
                   ]
         for i in range(len(dataset)):
-            self.assertEqual(CheckSubstr(
+            self.assertEqual(CheckSubstring(
                 dataset[i], sub_strings[i]), result[i]
             )
 

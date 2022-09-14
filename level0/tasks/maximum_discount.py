@@ -1,4 +1,5 @@
 def MaximumDiscount(things_count: int, price: list) -> int:
+    """Return maximum discount on given number of things"""
     if things_count < 3:
         return 0
     SET_THINGS = 3

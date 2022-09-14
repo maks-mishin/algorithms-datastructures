@@ -1,21 +1,26 @@
 class BigInteger:
+    """Class for working with large numbers"""
     def __init__(self, in_string: str) -> None:
-        self.digits = []
-        for i in range(len(in_string) - 1, -1, -1):
-            self.digits.append(int(in_string[i]))
+        self.digits = [int(num) for num in reversed(list(in_string))]
 
     def __lt__(self, other) -> bool:
         len_self, len_other = len(self.digits), len(other.digits)
         if len_self != len_other:
             return len_self < len_other
 
-        for i in range(len_self - 1, -1, -1):
-            if self.digits[i] != other.digits[i]:
-                return self.digits[i] < other.digits[i]
+        for self_digit, other_digit in zip(
+                reversed(self.digits), reversed(other.digits)
+        ):
+            if self_digit != other_digit:
+                return self_digit < other_digit
         return False
 
 
-def difference_big_integer(num_great: BigInteger, num_less: BigInteger) -> str:
+def difference_big_integer(lhs: BigInteger, rhs: BigInteger) -> str:
+    num_great, num_less = lhs, rhs
+    if lhs < rhs:
+        num_great, num_less = rhs, lhs
+
     len_great = len(num_great.digits)
     while len(num_less.digits) < len_great:
         num_less.digits.append(0)
@@ -33,15 +38,10 @@ def difference_big_integer(num_great: BigInteger, num_less: BigInteger) -> str:
     while len(difference_as_list) > 1 and difference_as_list[-1] == 0:
         difference_as_list.pop(-1)
 
-    difference_as_str = ''
-    for i in range(len(difference_as_list) - 1, -1, -1):
-        difference_as_str += str(difference_as_list[i])
-    return difference_as_str
+    return ''.join([str(i) for i in reversed(difference_as_list)])
 
 
-def BigMinus(s1: str, s2: str) -> str:
-    big_integer_1, big_integer_2 = BigInteger(s1), BigInteger(s2)
-
-    if big_integer_1 < big_integer_2:
-        return difference_big_integer(big_integer_2, big_integer_1)
-    return difference_big_integer(big_integer_1, big_integer_2)
+def BigMinus(first_num: str, second_num: str) -> str:
+    return difference_big_integer(
+        BigInteger(first_num), BigInteger(second_num)
+    )

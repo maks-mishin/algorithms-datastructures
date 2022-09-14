@@ -9,8 +9,12 @@ class TestBigMinus(unittest.TestCase):
         self.assertEqual(BigMinus('0', '0'), '0')
         self.assertEqual(BigMinus('10', '0'), '10')
         self.assertEqual(BigMinus('3', '7'), '4')
-        self.assertEqual(BigMinus('10000000000000000', '9999999999999999'), '1')
-        self.assertEqual(BigMinus('1724612763481263846', '1724612763481263846'), '0')
+        self.assertEqual(
+            BigMinus('10000000000000000', '9999999999999999'), '1'
+        )
+        self.assertEqual(
+            BigMinus('1724612763481263846', '1724612763481263846'), '0'
+        )
         self.assertEqual(BigMinus('1234567891', '1'), '1234567890')
         self.assertEqual(BigMinus('1', '1234'), '1233')
 
