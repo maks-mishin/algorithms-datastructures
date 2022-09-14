@@ -1,4 +1,5 @@
-def transform(nums: list, count_nums: int) -> list:
+def transform(nums: list) -> list:
+    count_nums = len(nums)
     result_list = []
     for i in range(count_nums):
         result_list.extend(
@@ -8,5 +9,4 @@ def transform(nums: list, count_nums: int) -> list:
 
 
 def TransformTransform(nums: list, count_nums: int) -> bool:
-    key = sum(transform(transform(nums, count_nums), count_nums))
-    return key % 2 == 0
+    return sum(transform(transform(nums))) % 2 == 0
