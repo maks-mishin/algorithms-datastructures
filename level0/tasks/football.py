@@ -1,4 +1,4 @@
-def swap_players(players: list, count_players: int) -> tuple:
+def swap_players(players: list, i: int, j: int) -> tuple:
     copy_players = players
     copy_players[i], copy_players[j] = copy_players[j], copy_players[i]
     return tuple(copy_players)
