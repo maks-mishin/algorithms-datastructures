@@ -27,5 +27,7 @@ def can_sorting_reverse(players: list, count_players: int) -> bool:
 
 
 def Football(players: list, count_players: int) -> bool:
+    if players == sorted(players):
+        return False
     return (can_sorting_reverse(players, count_players)
             or can_sorting_swap(players, count_players))
