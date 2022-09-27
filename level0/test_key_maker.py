@@ -10,7 +10,7 @@ class TestKeymaker(unittest.TestCase):
         self.assertEqual(Keymaker(10), '1001000010')
 
     def test_keymaker_math(self):
-        self.assertEqual(Keymaker(5), '10010')
+        self.assertEqual(keymaker_math(5), '10010')
         self.assertEqual(keymaker_math(10), '1001000010')
 
     def test_verify_keymaker(self):
