@@ -83,23 +83,17 @@ class TestLinkedList(unittest.TestCase):
 
     def test_insert_node(self):
         s_list = LinkedList()
-        s_list.insert(None, Node(77))
-        self.assertEqual(
-            make_list_from_linked_list(s_list),
-            [77]
-        )
-
-        s_list = LinkedList()
         s_list.add_in_tail(Node(12))
         s_list.insert(None, Node(77))
         self.assertEqual(
             make_list_from_linked_list(s_list),
             [77, 12]
         )
-
-        s_list.add_in_tail(Node(12))
-        s_list.add_in_tail(Node(55))
-        s_list.add_in_tail(Node(128))
+        s_list.insert(Node(12), Node(77))
+        self.assertEqual(
+            make_list_from_linked_list(s_list),
+            [77, 12, 77]
+        )
 
 
 class TestSumTwoLists(unittest.TestCase):

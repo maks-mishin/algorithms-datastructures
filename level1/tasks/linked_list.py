@@ -95,14 +95,6 @@ class LinkedList:
             self.head = new_node
             return
 
-        # if list is empty
-        if self.len() == 0:
-            self.add_in_tail(new_node)
-            return
-
-        if self.find(after_node.value) is None:
-            return
-
         # insert after arbitrary node
         node, prev_node = self.head, self.head
 
