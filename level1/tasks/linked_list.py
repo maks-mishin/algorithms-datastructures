@@ -90,6 +90,11 @@ class LinkedList:
 
     def insert(self, after_node, new_node):
         """Insert node in linked list"""
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+            return
+        
         if after_node is None:
             new_node.next = self.head
             self.head = new_node
