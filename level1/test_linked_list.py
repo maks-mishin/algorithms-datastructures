@@ -81,6 +81,14 @@ class TestLinkedList(unittest.TestCase):
             [12, 128, 128, 128]
         )
 
+    def test_insert_node_in_empty_list(self):
+        s_list = LinkedList()
+        s_list.insert(None, Node(77))
+        self.assertEqual(
+            make_list_from_linked_list(s_list),
+            [77]
+        )
+
     def test_insert_node(self):
         s_list = LinkedList()
         s_list.add_in_tail(Node(12))
