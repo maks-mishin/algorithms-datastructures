@@ -99,7 +99,7 @@ class TestBidirectList(unittest.TestCase):
         ]
         self.assertEqual(result_list, [128, 128, 128, 128])
 
-    def test_delete_one(self):
+    def test_delete_empty_list(self):
         s_list = LinkedList2()
         s_list.delete(14)
         self.assertEqual(
@@ -107,6 +107,9 @@ class TestBidirectList(unittest.TestCase):
         )
         self.assertIsNone(s_list.head)
         self.assertIsNone(s_list.tail)
+
+    def test_delete_one(self):
+        s_list = LinkedList2()
 
         s_list.add_in_tail(Node(14))
         s_list.delete(14)
@@ -116,15 +119,28 @@ class TestBidirectList(unittest.TestCase):
         self.assertIsNone(s_list.head)
         self.assertIsNone(s_list.tail)
 
-        s_list.add_in_tail(Node(15))
-        s_list.add_in_tail(Node(15))
-        s_list.add_in_tail(Node(16))
-        s_list.delete(15, all=False)
+    def test_delete_one_from_two(self):
+        s_list = LinkedList2()
+        first, second = 12, 14
+        s_list.insert(None, Node(first))
+        s_list.add_in_head(Node(second))
+        s_list.delete(first, all=False)
         self.assertEqual(
-            make_list_from_linked_list(s_list), [15, 16]
+            make_list_from_linked_list(s_list), [second]
         )
-        self.assertEqual(s_list.head.value, 15)
-        self.assertEqual(s_list.tail.value, 16)
+        self.assertEqual(s_list.head.value, second)
+        self.assertEqual(s_list.tail.value, second)
+
+        s_list = LinkedList2()
+        first, second = 12, 14
+        s_list.insert(None, Node(first))
+        s_list.insert(None, Node(second))
+        s_list.delete(second, all=False)
+        self.assertEqual(
+            make_list_from_linked_list(s_list), [first]
+        )
+        self.assertEqual(s_list.head.value, first)
+        self.assertEqual(s_list.tail.value, first)
 
     def test_delete_all_nodes(self):
         s_list = LinkedList2()

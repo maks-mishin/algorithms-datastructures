@@ -108,7 +108,8 @@ class LinkedList2:
 
         if self.head is None:
             self.tail = new_node
-
+            self.head = new_node
+            return
         new_node.next = self.head
-        new_node.prev = None
+        self.head.prev = new_node
         self.head = new_node
