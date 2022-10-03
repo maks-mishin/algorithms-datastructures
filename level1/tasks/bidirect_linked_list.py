@@ -9,7 +9,7 @@ class LinkedList2:
     def __init__(self):
         self.head = None
         self.tail = None
-        
+
     def add_in_tail(self, item):
         """Add new node to end of list"""
         if self.head is None:
@@ -20,7 +20,7 @@ class LinkedList2:
             self.tail.next = item
             item.prev = self.tail
         self.tail = item
-    
+
     def find(self, val):
         """Return the found node with given value"""
         node = self.head
@@ -42,8 +42,8 @@ class LinkedList2:
 
     def delete(self, val, all=False):
         """Delete node or all of nodes from linked list by given value"""
-        delete_node = self.head
-        while delete_node is not None:
+        deleted_node = self.head
+        while deleted_node is not None:
             if deleted_node.value == val and deleted_node == self.head:
                 self.head = self.head.next
                 if self.head is None:
@@ -80,43 +80,35 @@ class LinkedList2:
 
     def insert(self, after_node, new_node):
         """Insert node in linked list"""
-        
-        if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-            return
+
         if after_node is None and self.head is None:
             self.add_in_head(new_node)
             return
         if after_node is None and self.head is not None:
             self.add_in_tail(new_node)
             return
-        
+
         node = self.head
         while node is not None:
-            if (
-                node.value == after_node.value and
-                node == self.head
-            ):
-                node.next = new_node
-                new_node.prev = node
-                self.tail = new_node
-                break
-            if node.value == after_node.value:
-                new_node.next = node.next
+            if node.value != after_node.value:
+                node = node.next
+                continue
+            new_node.next = node.next
+            new_node.prev = node
+
+            if node.next is not None:
                 node.next.prev = new_node
-                new_node.prev = node
-                node.next = new_node
-                break
-            node = node.next
-                
+            if node.next is None:
+                self.tail = new_node
+            node.next = new_node
+            break
 
     def add_in_head(self, new_node):
         """Insert new node in head of linked list"""
-        
+
         if self.head is None:
             self.tail = new_node
-        
+
         new_node.next = self.head
         new_node.prev = None
         self.head = new_node

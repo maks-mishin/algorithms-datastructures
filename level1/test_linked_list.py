@@ -4,7 +4,7 @@ from tasks.linked_list import LinkedList, Node
 from tasks.sum_linked_lists import sum_linked_lists
 
 
-def make_list_from_linked_list(s_list: LinkedList) -> list:
+def make_list_from_linked_list(s_list) -> list:
     result_list = []
     node = s_list.head
     while node is not None:
