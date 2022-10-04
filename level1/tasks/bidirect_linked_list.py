@@ -48,6 +48,8 @@ class LinkedList2:
                 self.head = self.head.next
                 if self.head is None:
                     self.tail = None
+                if self.head is not None:
+                    self.head.prev = None
                 if not all:
                     break
                 deleted_node = self.head
