@@ -10,6 +10,18 @@ class LinkedList2:
         self.head = None
         self.tail = None
 
+    def print_all_nodes(self):
+        """Debug print"""
+        node = self.head
+        while node is not None:
+            prev, next = node.prev, node.next
+            print(prev.value if prev is not None else None,
+                  '<--',
+                  node.value if node is not None else None, end=' | ')
+            print(node.value if node is not None else None,
+                  '-->',
+                  next.value if next is not None else None)
+
     def add_in_tail(self, item):
         """Add new node to end of list"""
         if self.head is None:
@@ -40,32 +52,35 @@ class LinkedList2:
             node = node.next
         return result_list
 
+    def delete_one_node(self, deleted_node):
+        """Delete one node from linked list by pointer"""
+        if deleted_node == self.head and deleted_node.next is None:
+            self.head, self.tail = None, None
+            return
+        if deleted_node == self.head and deleted_node.next is not None:
+            self.head = self.head.next
+            self.head.prev = None
+            return
+        if deleted_node == self.tail and deleted_node.prev is not None:
+            self.tail = deleted_node.prev
+            self.tail.next = None
+            return
+        deleted_node.prev.next = deleted_node.next
+        deleted_node.next.prev = deleted_node.prev
+
     def delete(self, val, all=False):
         """Delete node or all of nodes from linked list by given value"""
-        deleted_node = self.head
-        while deleted_node is not None:
-            if deleted_node.value == val and deleted_node == self.head:
-                self.head = self.head.next
-                if self.head is None:
-                    self.tail = None
-                if self.head is not None:
-                    self.head.prev = None
-                if not all:
-                    break
-                deleted_node = self.head
-                continue
-            if deleted_node.value == val and deleted_node == self.tail:
-                self.tail = deleted_node.prev
-                if self.tail is None:
-                    break
-                self.tail.next = None
-                break
-            if deleted_node.value == val:
-                deleted_node.prev.next = deleted_node.next
-                deleted_node.next.prev = deleted_node.prev
-                if not all:
-                    break
-            deleted_node = deleted_node.next
+        if self.head is None:
+            return
+
+        delete_nodes = []
+        if not all:
+            delete_nodes = [self.find(val)]
+        if all:
+            delete_nodes = self.find_all(val)
+
+        for delete_node in delete_nodes:
+            self.delete_one_node(delete_node)
 
     def clean(self):
         """Clean linked list"""
@@ -81,8 +96,7 @@ class LinkedList2:
         return len_list
 
     def insert(self, after_node, new_node):
-        """Insert node in linked list"""
-
+        """Insert node into linked list"""
         if after_node is None and self.head is None:
             self.add_in_head(new_node)
             return
