@@ -54,6 +54,8 @@ class Queue:
         self.count += 1
 
     def dequeue(self):
+        if self.count == 0:
+            return None
         if self.stack_right.size() == 0:
             self.move_elements()
         self.count -= 1
