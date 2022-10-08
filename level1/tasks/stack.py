@@ -25,7 +25,7 @@ class Stack:
 
     def pop(self):
         if self.count == 0:
-            raise IndexError('Pop from empty list')
+            return None
         popped_node = self.head.next
         self.head.next = popped_node.next
         self.count -= 1
@@ -33,5 +33,5 @@ class Stack:
 
     def peek(self):
         if self.count == 0:
-            raise IndexError('Peek from empty list')
+            return None
         return self.head.next.value

@@ -19,10 +19,7 @@ class TestStack(unittest.TestCase):
 
     def test_pop(self):
         stack = Stack()
-        try:
-            stack.pop()
-        except IndexError as ex:
-            self.assertEqual(str(ex), 'Pop from empty list')
+        self.assertIsNone(stack.pop())
         stack.push(14)
         self.assertEqual(stack.pop(), 14)
         self.assertEqual(stack.size(), 0)
@@ -36,10 +33,7 @@ class TestStack(unittest.TestCase):
 
     def test_peek(self):
         stack = Stack()
-        try:
-            stack.peek()
-        except IndexError as ex:
-            self.assertEqual(str(ex), 'Peek from empty list')
+        self.assertIsNone(stack.peek())
         stack.push(19)
         self.assertEqual(stack.peek(), 19)
         self.assertEqual(stack.size(), 1)
