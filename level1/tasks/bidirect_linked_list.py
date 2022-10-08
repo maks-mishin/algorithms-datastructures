@@ -10,18 +10,6 @@ class LinkedList2:
         self.head = None
         self.tail = None
 
-    def print_all_nodes(self):
-        """Debug print"""
-        node = self.head
-        while node is not None:
-            prev, next = node.prev, node.next
-            print(prev.value if prev is not None else None,
-                  '<--',
-                  node.value if node is not None else None, end=' | ')
-            print(node.value if node is not None else None,
-                  '-->',
-                  next.value if next is not None else None)
-
     def add_in_tail(self, item):
         """Add new node to end of list"""
         if self.head is None:

@@ -19,16 +19,6 @@ class LinkedList:
             self.tail.next = item
         self.tail = item
 
-    def print_all_nodes(self):
-        """Debug print"""
-        node = self.head
-        while node is not None:
-            if node.next is None:
-                print(node.value, '-->', node.next)
-            else:
-                print(node.value, '-->', node.next.value)
-            node = node.next
-
     def find(self, val):
         """Return the found node with given value"""
         node = self.head

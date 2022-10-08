@@ -9,13 +9,14 @@ class DummyNode(Node):
     def __init__(self):
         super().__init__()
 
+print(isinstance(DummyNode(), Node))
+
 
 class DoublyLinkedList:
     def __init__(self):
         self.head, self.tail = DummyNode(), DummyNode()
         self.head.next = self.tail
         self.tail.prev = self.head
-        self.head.prev = self.tail.next = None
         self.count = 0
 
     def find(self, val):

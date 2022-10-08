@@ -56,7 +56,7 @@ class DynArray:
             print(self.array[i], end=' ')
 
     def _shrink_capacity(self):
-        if (self.count / self.min_capacity < 0.5):
+        if self.count / self.min_capacity < 0.5:
             self.capacity = self.min_capacity
             return
         if (self.count / self.capacity < 0.5 and
