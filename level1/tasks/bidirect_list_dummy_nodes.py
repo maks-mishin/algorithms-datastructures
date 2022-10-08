@@ -1,14 +1,18 @@
 class Node:
-    def __init__(self, val=None, dummy=False):
+    def __init__(self, val=None):
         self.value = val
         self.prev = None
         self.next = None
-        self.dummy = dummy
+
+
+class DummyNode(Node):
+    def __init__(self):
+        super().__init__()
 
 
 class DoublyLinkedList:
     def __init__(self):
-        self.head, self.tail = Node(dummy=True), Node(dummy=True)
+        self.head, self.tail = DummyNode(), DummyNode()
         self.head.next = self.tail
         self.tail.prev = self.head
         self.head.prev = self.tail.next = None
@@ -17,8 +21,7 @@ class DoublyLinkedList:
     def find(self, val):
         """Return the found node with given value"""
         node = self.head.next
-        while not node.dummy:
-            print('we are here')
+        while isinstance(node, Node):
             if node.value == val:
                 return node
             node = node.next
@@ -28,7 +31,7 @@ class DoublyLinkedList:
         """Return list of all found nodes with given value"""
         result_list = []
         node = self.head.next
-        while not node.dummy:
+        while isinstance(node, Node):
             if node.value == val:
                 result_list.append(node)
             node = node.next
@@ -79,7 +82,7 @@ class DoublyLinkedList:
             return
 
         node = self.head.next
-        while not node.dummy:
+        while isinstance(node, Node):
             if node.value != after_node.value:
                 node = node.next
                 continue
