@@ -1,12 +1,16 @@
 from stack import Stack
 
 
-postfix_operations = {
-    '+': lambda lhs, rhs: lhs + rhs,
-    '-': lambda lhs, rhs: lhs - rhs,
-    '*': lambda lhs, rhs: lhs * rhs,
-    '/': lambda lhs, rhs: lhs / rhs,
-}
+def calc_one_operation(stack: Stack, operation: str):
+    rhs, lhs = stack.pop(), stack.pop()
+    if operation == '+':
+        stack.push(lhs + rhs)
+    if operation == '-':
+        stack.push(lhs - rhs)
+    if operation == '*':
+        stack.push(lhs * rhs)
+    if operation == '/':
+        stack.push(lhs / rhs)
 
 
 def calc_postfix_expression(expression: str):
@@ -16,10 +20,9 @@ def calc_postfix_expression(expression: str):
 
     while stack1.size() > 0:
         if stack1.peek().isdigit():
+            print(stack1.peek())
             stack2.push(int(stack1.pop()))
             continue
-        stack2.push(
-            postfix_operations[stack1.peek()](stack2.pop(), stack2.pop())
-        )
+        calc_one_operation(stack2, stack1.peek())
         stack1.pop()
     return stack2.pop()
