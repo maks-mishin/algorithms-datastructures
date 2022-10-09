@@ -2,7 +2,8 @@ from stack import Stack
 
 
 def calc_one_operation(stack: Stack, operation: str):
-    rhs, lhs = stack.pop(), stack.pop()
+    rhs = stack.pop()
+    lhs = stack.pop()
     if operation == '+':
         stack.push(lhs + rhs)
     if operation == '-':

@@ -7,9 +7,7 @@ class Node:
 
 class DummyNode(Node):
     def __init__(self):
-        super().__init__()
-
-print(isinstance(DummyNode(), Node))
+        super(DummyNode, self).__init__()
 
 
 class DoublyLinkedList:
