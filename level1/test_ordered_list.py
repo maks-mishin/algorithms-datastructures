@@ -12,6 +12,8 @@ class TestOrderedList(unittest.TestCase):
             [node.value for node in ol.get_all()], []
         )
         self.assertEqual(ol.len(), 0)
+        self.assertIsNone(ol.head)
+        self.assertIsNone(ol.tail)
 
         ol = OrderedList(True)
         self.assertTrue(ol.is_ascending())
@@ -83,6 +85,8 @@ class TestOrderedList(unittest.TestCase):
             ol.get_all(), []
         )
         self.assertEqual(ol.len(), 0)
+        self.assertIsNone(ol.head)
+        self.assertIsNone(ol.tail)
 
     def test_delete_desc(self):
         ol = OrderedList(False)
@@ -92,6 +96,8 @@ class TestOrderedList(unittest.TestCase):
             ol.get_all(), []
         )
         self.assertEqual(ol.len(), 0)
+        self.assertIsNone(ol.head)
+        self.assertIsNone(ol.tail)
 
     def test_clean(self):
         ol = OrderedList(True)
@@ -114,10 +120,6 @@ class TestOrderedListString(unittest.TestCase):
         self.assertEqual(
             ol.compare('  123  ', '  ksdlkfkl '), -1
         )
-
-
-if __name__ == '__main__':
-    unittest.main()
 
 
 if __name__ == '__main__':
