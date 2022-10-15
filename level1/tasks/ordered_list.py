@@ -124,10 +124,10 @@ class OrderedList:
         return result_list
 
 
-class OrderedListString(OrderedList):
+class OrderedStringList(OrderedList):
     def __init__(self, asc):
-        super(OrderedListString, self).__init__(asc)
+        super(OrderedStringList, self).__init__(asc)
 
     def compare(self, v1, v2):
         v1, v2 = v1.strip(), v2.strip()
-        return super(OrderedListString, self).compare(v1, v2)
+        return super(OrderedStringList, self).compare(v1, v2)
