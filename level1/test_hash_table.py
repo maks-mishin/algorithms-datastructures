@@ -26,8 +26,12 @@ class TestHashTable(unittest.TestCase):
 
     def test_seek_slot(self):
         hash_table = HashTable(17, 3)
-        value = 'sdjfnskjfdnkjsndf'
-        self.assertEqual(hash_table.seek_slot(value), hash_table.hash_fun(value))
+        value = 'aaa'
+        for i in range(16):
+            hash_table.slots[i] = value
+        self.assertEqual(hash_table.seek_slot(value), 16)
+        hash_table.slots[16] = value
+        self.assertIsNone(hash_table.seek_slot(value + value))
 
     def test_find(self):
         hash_table = HashTable(17, 3)
@@ -39,6 +43,56 @@ class TestHashTable(unittest.TestCase):
         self.assertIsNone(hash_table.find(value))
         hash_table.put(value)
         self.assertEqual(hash_table.find(value), hash_table.hash_fun(value))
+
+    def test_hash_fun_1(self):
+        table = HashTable(17, 3)
+        self.assertTrue(table.hash_fun("aaa") < table.size)
+        self.assertTrue(
+            table.hash_fun("aaaagadgadgadgadfgergerge43534525") < table.size)
+        self.assertTrue(table.hash_fun(
+            "aaaagadgasdgfdg4dgadgadfgergerge43534525") < table.size)
+        self.assertTrue(table.hash_fun("534525") < table.size)
+        self.assertTrue(table.hash_fun("z") < table.size)
+        self.assertTrue(table.hash_fun("b") < table.size)
+
+    def test_seek_slot_1(self):
+        table = HashTable(7, 3)
+        table.slots[0] = "a"
+        table.slots[1] = "a"
+        table.slots[2] = "a"
+        table.slots[3] = "a"
+        # table.slots[4] = "a"
+        table.slots[5] = "a"
+        table.slots[6] = "a"
+        self.assertEqual(table.seek_slot("b"), 4)
+        table.slots[4] = "a"
+        self.assertEqual(table.seek_slot("b"), None)
+
+        table = HashTable(9, 3)
+        table.slots[0] = "a"
+        table.slots[2] = "a"
+        table.slots[3] = "a"
+        table.slots[4] = "a"
+        table.slots[5] = "a"
+        table.slots[6] = "a"
+        table.slots[7] = "a"
+        table.slots[8] = "a"
+        self.assertEqual(table.seek_slot("b"), 1)
+
+    def test_put_1(self):
+        table = HashTable(7, 3)
+        for c in "abcdefz":
+            self.assertIsNotNone(table.put(c))
+
+        self.assertIsNone(table.put("safasf"))
+
+    def test_find_1(self):
+        table = HashTable(7, 3)
+        for c in "abcdefz":
+            table.put(c)
+
+        self.assertIsNotNone(table.find("z"))
+        self.assertIsNone(table.find("zzz"))
 
 
 if __name__ == '__main__':
