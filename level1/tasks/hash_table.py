@@ -35,15 +35,3 @@ class HashTable:
             return self.slots.index(value)
         except ValueError:
             return None
-
-
-table = HashTable(9, 3)
-table.slots[0] = "a"
-table.slots[2] = "a"
-table.slots[3] = "a"
-table.slots[4] = "a"
-table.slots[5] = "a"
-table.slots[6] = "a"
-table.slots[7] = "a"
-table.slots[8] = "a"
-print(table.seek_slot("b"))
