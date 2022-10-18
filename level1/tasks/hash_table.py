@@ -31,7 +31,8 @@ class HashTable:
         return None
 
     def find(self, value):
-        try:
-            return self.slots.index(value)
-        except ValueError:
-            return None
+        for index_slot in range(self.size):
+            if self.slots[index_slot] != value:
+                continue
+            return index_slot
+        return None
