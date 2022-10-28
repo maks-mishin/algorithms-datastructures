@@ -22,7 +22,7 @@ class NativeDictionary:
         while self.slots[index_slot] is not None:
             index_slot = (index_slot + step) % self.size
             count_steps += 1
-            if count_steps > self.size:
+            if count_steps == self.size:
                 return None
         return index_slot
 
