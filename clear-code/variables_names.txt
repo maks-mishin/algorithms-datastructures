@@ -1,0 +1,35 @@
+nedge - numberOfCurrentEdge
+// геометрический номер ребра при работе с расчетными сетками
+
+globalIdx - globalIndexOfLocalElement
+// индекс элемента в глобальном массиве при декомпозиции
+
+nProc - numberOfCurrentProcessor
+// номер текущего процессора при работе с MPI
+
+doc_file - uploaded_document_from_user
+// загруженный документ из формы пользователя
+
+current_avg - current_average_value_of_times_array
+// среднее значение массива временных значений на текущей итерации внешнего цикла
+
+sum_seq - sum_of_integer_sequence
+// сумма последовательности целых чисел
+
+vec_str - input_vector_of_strings
+// входной вектор строк
+
+list_common - list_of_common_restaurant_names
+// список общих названий ресторанов во входных списках
+
+min_sum - min_sum_of_user_order
+// минимальная сумма заказа пользователя в конкретном ресторане
+
+auth_logig - login_of_authorized_user
+// логин авторизованного пользователя
+
+current_str - current_state_of_text_editor
+// текущее состояние строки в текстовом редакторе
+
+elapsed_time - time_elapsed_from_start
+// время, прошедшее со старта

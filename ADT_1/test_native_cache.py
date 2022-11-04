@@ -11,7 +11,7 @@ def random_string():
 
 
 class TestNativeCacheEmptySlots(unittest.TestCase):
-
+    
     def setUp(self):
         self.size = 17
         self.s_cache = NativeCache(self.size)
@@ -28,7 +28,6 @@ class TestNativeCacheEmptySlots(unittest.TestCase):
         self.assertListEqual(self.s_cache.slots, self.empty_slots)
         self.assertListEqual(self.s_cache.values, self.empty_slots)
         self.assertListEqual(self.s_cache.hits, self.hits)
-        self.assertFalse(self.s_cache.is_full())
         for index in range(self.size):
             self.assertIsNone(self.s_cache.slots[index])
             self.assertIsNone(self.s_cache.values[index])
@@ -43,16 +42,13 @@ class TestNativeCacheEmptySlots(unittest.TestCase):
         is_key = self.s_cache.is_key(self.key)
         self.assertFalse(is_key)
 
-    def test_is_full_empty_slots(self):
-        self.assertFalse(self.s_cache.is_full())
-
     def test_put_in_empty_slots(self):
         self.s_cache.put(self.key, self.value)
         self.assertIn(self.key, self.s_cache.slots)
         self.assertIn(self.value, self.s_cache.values)
 
     def test_get_in_empty_slots(self):
-        value = self.s_cache.get_value(self.key)
+        value = self.s_cache.get(self.key)
         self.assertIsNone(value)
         for index in range(self.size):
             self.assertEqual(self.s_cache.hits[index], 0)
@@ -75,7 +71,6 @@ class TestNativeCacheFullSlots(unittest.TestCase):
         self.assertEqual(len(self.s_cache.slots), self.size)
         self.assertEqual(len(self.s_cache.values), self.size)
         self.assertEqual(len(self.s_cache.hits), self.size)
-        self.assertTrue(self.s_cache.is_full())
         for index in range(self.size):
             self.assertIsNotNone(self.s_cache.slots[index])
             self.assertIsNotNone(self.s_cache.values[index])
@@ -92,9 +87,6 @@ class TestNativeCacheFullSlots(unittest.TestCase):
         is_key = self.s_cache.is_key(random.choice(self.s_cache.slots))
         self.assertTrue(is_key)
 
-    def test_is_full_full_slots(self):
-        self.assertTrue(self.s_cache.is_full())
-
     def test_put_in_full_slots(self):
         self.s_cache.put(self.new_key, self.new_value)
         self.assertIn(self.new_key, self.s_cache.slots)
@@ -107,10 +99,8 @@ class TestNativeCacheFullSlots(unittest.TestCase):
         for i in range(1, 10):
             for index in range(self.size - 1):
                 key = self.s_cache.slots[index]
-                # проверяем get_hit()
-                self.assertEqual(self.s_cache.get_hit(key), i - 1)
-                # проверяем get_value()
-                value = self.s_cache.get_value(key)
+                # проверяем get()
+                value = self.s_cache.get(key)
                 self.assertIsNotNone(value)
                 self.assertIn(value, self.s_cache.values)
             # проверяем, корректно ли учитывается
