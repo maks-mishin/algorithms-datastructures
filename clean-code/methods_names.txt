@@ -1,0 +1,35 @@
+1. Функция, отдающая главную страницу и пагинатор с постами соц. сети.
+index() -- all_posts()
+
+2. Функция создания нового поста.
+new_post() -- create_new_post()
+
+3. Отобразить на графике пользователей с наибольшим числом комментариев
+most_commets() -- view_users_with_most_comments()
+
+4. Оторазить распределение комментариев сообщества по дням
+comments_by_days() -- view_comments_distribution_by_days()
+
+5. Перевод timestamp в date.
+timestamp_to_date -- convert_timestamp_to_date
+
+6. Чтение csv файла и конвертация в python-список.
+csv_reader -- read_csv_and_convert_to_list
+
+7. Запись python-списка в csv файл.
+csv_writer -- write_list_to_csv
+
+8. Функция парсинга сайта hh.ru по выбранному региону и языку программированию.
+hh_parse() -- parse_hh_by_region_and_language()
+
+9. Метод получения кода страны из класса телефонного номера.
+PhoneNumber::country_code() -- PhoneNumber::get_country_code
+
+10. Вычисление количества кубов на текущем уровне.
+Level::NCubesXYZComputation() -- Level::computateCountOfCubes()
+
+11. Перенумерация индексов базисных функций текущего уровня
+Level::RWGs_renumbering() -- Level::renumberIndexesOfRWG()
+
+12. Проверка валидности формы.
+UserForm::valid() -- FormValid::is_valid()
