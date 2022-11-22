@@ -1,0 +1,21 @@
+1. class Circle -- класс, описывающий окружность.
+
+Метод построения через центральную точку и радиус.
+Circle first_circle = Circle.FromPointAndRadius(Point(1.0, 1.0, 1.0), 14.0)
+
+Метод построения окружности по трем точкам.
+Circle second_circle = Circle.FromThreePoints(Point(1.0, 1.0, 1.0), Point(1.0, 2.0, 1.0), Point(1.0, 1.0, 3.0))
+
+Метод построения окружности по двум концевым точкам диаметра.
+Circle third_circle = Circle.FromDiameterEndpoints(Point(1.0, 1.0, 1.0), Point(1.0, 1.0, 2.0))
+
+2. Было -- стало.
+
+- Абстрактный класс фигуры на плоскости (в случае, если подразумевается ещё работа с 3D геометрией).
+class Figure -- class ShapeFactory2D
+
+- Абстрактный класс пользователя.
+class AbstractUser -- class UserFactory
+
+- Абстрактный класс материала при моделировании каких-либо воздействий.
+class Material -- class MaterialFactory.
