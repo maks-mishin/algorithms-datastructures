@@ -13,7 +13,7 @@
 std::string twoSort(std::vector<std::string> vec_str)
 {
     std::sort(vec_str.begin(), vec_str.end());
-    std::string result = "";
+    std::string result;
     for (std::string::iterator it=vec_str[0].begin(); it != vec_str[0].end() - 1; it++) {
         result += *it;
         result += "***";
