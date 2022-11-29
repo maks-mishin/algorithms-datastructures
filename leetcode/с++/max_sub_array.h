@@ -1,5 +1,4 @@
 // Source : https://leetcode.com/problems/maximum-subarray/
-// Author : Maks Mishin
 // Date   : 2/3/2022
 
 #ifndef ALGORITHM_TASKS_MAX_SUB_ARRAY_H

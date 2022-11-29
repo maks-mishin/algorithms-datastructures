@@ -1,5 +1,4 @@
 // Source : https://leetcode.com/problems/first-bad-version/
-// Author : Maks Mishin
 // Date   : 1/26/2022
 
 #ifndef ALGORITHM_TASKS_FIRST_BAD_VERSION_H

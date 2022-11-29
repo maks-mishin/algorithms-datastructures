@@ -14,8 +14,8 @@ def BiggerGreater(input_string: str) -> str:
 
     invocations = set()
     invocation = list(input_string)
-    for i, ch1 in enumerate(input_string):
-        for j, ch2 in enumerate(input_string):
+    for i in range(len(input_string)):
+        for j in range(len(input_string)):
             swap_symbols(invocation, j, i)
             invocations.add(''.join(invocation))
     

@@ -1,5 +1,4 @@
 // Source : https://leetcode.com/problems/single-number/
-// Author : Maks Mishin
 // Date   : 1/30/2022
 
 #ifndef ALGORITHM_TASKS_SINGLE_NUMBER_H

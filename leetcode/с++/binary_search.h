@@ -1,5 +1,4 @@
 // Source : https://leetcode.com/problems/binary-search/
-// Author : Maks Mishin
 // Date   : 1/26/2022
 
 #ifndef ALGORITHM_TASKS_BINARY_SEARCH_H

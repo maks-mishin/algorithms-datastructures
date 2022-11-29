@@ -1,5 +1,4 @@
 // Source : https://leetcode.com/problems/climbing-stairs/
-// Author : Maks Mishin
 // Date   : 2/1/2022
 
 #ifndef ALGORITHM_TASKS_CLIMBING_STAIRS_H
