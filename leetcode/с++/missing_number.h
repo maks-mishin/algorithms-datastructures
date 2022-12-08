@@ -38,7 +38,7 @@ void testMissingNumber() {
     assert(solution.missingNumber(test_case_1) == 2);
     assert(solution.missingNumber(test_case_2) == 2);
     assert(solution.missingNumber(test_case_3) == 8);
-    cout << "Tests OK" << endl;
+    std::cout << "Tests OK" << std::endl;
 }
 
 #endif //ALGORITHM_TASKS_MISSING_NUMBER_H
