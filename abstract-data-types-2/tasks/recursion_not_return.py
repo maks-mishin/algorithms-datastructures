@@ -5,7 +5,7 @@ def print_even_numbers(input_list, i):
         return
     if input_list[i] % 2 == 0:
         print(input_list[i], end=' ')
-    return print_even_numbers(input_list, i + 1)
+    print_even_numbers(input_list, i + 1)
 
 
 def print_numbers_even_indexes(input_list, i):
@@ -15,4 +15,4 @@ def print_numbers_even_indexes(input_list, i):
         return
     if i % 2 == 0:
         print(input_list[i], end=' ')
-    return print_numbers_even_indexes(input_list, i + 1)
+    print_numbers_even_indexes(input_list, i + 1)

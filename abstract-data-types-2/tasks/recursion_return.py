@@ -26,6 +26,6 @@ def is_palindrom(input_str, symbol_index, str_len):
     """Проверка, является ли строка палиндромом"""
     if str_len <= 1:
         return True
-    if input_str[symbol_index] == input_str[-symbol_index - 1]:
-        return is_palindrom(input_str, symbol_index + 1, str_len - 1)
-    return False
+    if not input_str[symbol_index] == input_str[-symbol_index - 1]:
+        return False
+    return is_palindrom(input_str, symbol_index + 1, str_len - 1)
