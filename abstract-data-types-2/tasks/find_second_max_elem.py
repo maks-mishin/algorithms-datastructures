@@ -1,15 +1,19 @@
-def quicksort(nums):
-    if len(nums) <= 1:
-        return nums
-    pivot = nums[len(nums) // 2]
-    lower_pivot_elems = [n for n in nums if n < pivot]
-    e_nums = [pivot] * nums.count(pivot)
-    upper_pivot_elems = [n for n in nums if n > pivot]
-    return quicksort(lower_pivot_elems) + e_nums + quicksort(upper_pivot_elems)
+import math
+import sys
 
 
-def find_second_max_elem(nums):
-    sorted_nums = quicksort(nums)
-    if len(sorted_nums) >= 2:
-        return sorted_nums[-2]
-    return None
+def calc_first_second_largest(nums, index, list_largest):
+    if index < 2:
+        return
+    if nums[index] > list_largest[0]:
+        list_largest[1] = list_largest[0]
+        list_largest[0] = nums[index]
+    elif nums[index] > list_largest[1] and nums[index] != list_largest[0]:
+        list_largest[1] = nums[index]
+    calc_first_second_largest(nums, index - 1, list_largest)
+
+
+def find_second_largest_elem(nums):
+    list_largest = [nums[0], nums[1]] if nums[0] > nums[1] else [nums[1], nums[0]]
+    calc_first_second_largest(nums, len(nums) - 1, list_largest)
+    return list_largest[1]
