@@ -1,7 +1,3 @@
-import math
-import sys
-
-
 def calc_first_second_largest(nums, index, list_largest):
     if index < 2:
         return
