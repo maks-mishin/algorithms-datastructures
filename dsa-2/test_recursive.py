@@ -7,6 +7,11 @@ from tasks.find_second_max_elem import find_second_largest_elem
 
 
 class TestFindSecondLargest(unittest.TestCase):
+    def test_two_same_max(self):
+        self.assertEqual(
+            find_second_largest_elem([2, 1, 2, 0, -1]), 2
+        )
+
     def test_positive(self):
         self.assertEqual(
             find_second_largest_elem([2, 1]), 1

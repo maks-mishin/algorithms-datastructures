@@ -12,4 +12,8 @@ def generate_brackets_sequence(p, left, right, parens=None):
 
 
 def generate_all_correct_brackets_sequences(count_seq):
+    """
+    Функция генерации всех корректных сбалансированных комбинаций
+    круглых скобок
+    """
     return generate_brackets_sequence('', count_seq, count_seq)
