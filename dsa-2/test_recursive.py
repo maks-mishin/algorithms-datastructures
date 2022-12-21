@@ -4,12 +4,20 @@ from tasks.recursion_return import is_palindrom, sum_digits, list_length, power
 from tasks.recursion_not_return import print_even_numbers, \
     print_numbers_even_indexes
 from tasks.find_second_max_elem import find_second_largest_elem
+from tasks.balanced_parentheses import \
+    generate_all_correct_brackets_sequences
 
 
 class TestFindSecondLargest(unittest.TestCase):
     def test_two_same_max(self):
         self.assertEqual(
             find_second_largest_elem([2, 1, 2, 0, -1]), 2
+        )
+        self.assertEqual(
+            find_second_largest_elem([0, 0, 0, 0]), 0
+        )
+        self.assertEqual(
+            find_second_largest_elem([-1, -1, -1, -9]), -1
         )
 
     def test_positive(self):
@@ -34,7 +42,7 @@ class TestFindSecondLargest(unittest.TestCase):
         )
 
 
-class TestRecursive(unittest.TestCase):
+class TestRecursiveReturnFunctions(unittest.TestCase):
     def test_is_palindrom(self):
         pass
 
@@ -46,6 +54,20 @@ class TestRecursive(unittest.TestCase):
 
     def test_power(self):
         pass
+
+
+class TestGenerateBracketsSequence(unittest.TestCase):
+    def test_brackets(self):
+        self.assertEqual(
+            generate_all_correct_brackets_sequences(1), ['()']
+        )
+        self.assertEqual(
+            generate_all_correct_brackets_sequences(2), ['(())', '()()']
+        )
+        self.assertEqual(
+            generate_all_correct_brackets_sequences(3),
+            ['((()))', '(()())', '(())()', '()(())', '()()()']
+        )
 
 
 if __name__ == '__main__':
