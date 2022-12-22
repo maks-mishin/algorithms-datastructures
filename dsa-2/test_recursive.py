@@ -1,8 +1,5 @@
 import unittest
 
-from tasks.recursion_return import is_palindrom, sum_digits, list_length, power
-from tasks.recursion_not_return import print_even_numbers, \
-    print_numbers_even_indexes
 from tasks.find_second_max_elem import find_second_largest_elem
 from tasks.balanced_parentheses import \
     generate_all_correct_brackets_sequences
@@ -40,20 +37,6 @@ class TestFindSecondLargest(unittest.TestCase):
         self.assertEqual(
             find_second_largest_elem([1, 0, -1]), 0
         )
-
-
-class TestRecursiveReturnFunctions(unittest.TestCase):
-    def test_is_palindrom(self):
-        pass
-
-    def test_sum_digits(self):
-        pass
-
-    def test_list_length(self):
-        pass
-
-    def test_power(self):
-        pass
 
 
 class TestGenerateBracketsSequence(unittest.TestCase):
