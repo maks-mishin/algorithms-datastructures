@@ -67,8 +67,11 @@ class TestSimpleTree(unittest.TestCase):
         self.assertIn(self.node_4, allNodes)
 
     def test_find_nodes_by_value(self):
-        nodes = self.tree.FindNodesByValue(4)
-        self.assertIn(self.node_4, nodes)
+        node_4 = SimpleTreeNode(4, None)
+        tree = SimpleTree(root=node_4)
+        nodes = tree.FindNodesByValue(4)
+        self.assertIn(node_4, nodes)
+
 
     def test_move_node(self):
         self.assertNotIn(self.node_6, self.tree.Root.Children)

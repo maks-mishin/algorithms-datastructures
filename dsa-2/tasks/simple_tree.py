@@ -46,7 +46,10 @@ class SimpleTree:
     def FindNodesByValue(self, val):
         if self.Root is None:
             return []
-        return self.FindNodesByValueOfSubtree(self.Root, val)
+        FoundNodes = self.FindNodesByValueOfSubtree(self.Root, val)
+        if self.Root.NodeValue == val:
+            FoundNodes.append(self.Root)
+        return FoundNodes
 
     def FindNodesByValueOfSubtree(self, Node, val):
         ListOfNodes = []
