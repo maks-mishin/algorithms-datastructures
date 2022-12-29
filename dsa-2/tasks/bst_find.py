@@ -7,9 +7,6 @@ class BSTNode:
         self.LeftChild = None
         self.RightChild = None
 
-    def __str__(self):
-        return f'Node(key={str(self.NodeKey)})'
-
 
 class BSTFind:
 
@@ -17,10 +14,6 @@ class BSTFind:
         self.Node = None
         self.NodeHasKey = False
         self.ToLeft = False
-
-    def __str__(self):
-        return f'BSTFind(Node={str(self.Node)}, NodeHasKey={self.NodeHasKey}, ' \
-               f'ToLeft={self.ToLeft})'
 
 
 class BST:
