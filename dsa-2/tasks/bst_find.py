@@ -1,25 +1,22 @@
 class BSTNode:
 
     def __init__(self, key, val, parent):
-        self.NodeKey = key  # ключ узла
-        self.NodeValue = val  # значение в узле
-        self.Parent = parent  # родитель или None для корня
-        self.LeftChild = None  # левый потомок
-        self.RightChild = None  # правый потомок
+        self.NodeKey = key
+        self.NodeValue = val
+        self.Parent = parent
+        self.LeftChild = None
+        self.RightChild = None
 
     def __str__(self):
         return f'Node(key={str(self.NodeKey)})'
 
 
-class BSTFind:  # промежуточный результат поиска
+class BSTFind:
 
     def __init__(self):
-        self.Node = None  # None если
-        # в дереве вообще нету узлов
-
-        self.NodeHasKey = False  # True если узел найден
-        self.ToLeft = False  # True, если родительскому узлу надо
-        # добавить новый узел левым потомком
+        self.Node = None
+        self.NodeHasKey = False
+        self.ToLeft = False
 
     def __str__(self):
         return f'BSTFind(Node={str(self.Node)}, NodeHasKey={self.NodeHasKey}, ' \
@@ -29,7 +26,15 @@ class BSTFind:  # промежуточный результат поиска
 class BST:
 
     def __init__(self, node):
-        self.Root = node  # корень дерева, или None
+        self.Root = node
+        self.CountNodes = 1
+
+    def MakeFindResult(self, Node, HasKey, ToLeft):
+        FindResult = BSTFind()
+        FindResult.Node = Node
+        FindResult.NodeHasKey = HasKey
+        FindResult.ToLeft = ToLeft
+        return FindResult
 
     def FindNodeByKey(self, key):
         """
@@ -39,28 +44,19 @@ class BST:
         if self.Root is None:
             return BSTFind()
 
-        FindResult = BSTFind()
         CurrentNode = self.Root
         while CurrentNode is not None:
             if CurrentNode.NodeKey == key:
-                FindResult.Node = CurrentNode
-                FindResult.NodeHasKey = True
-                return FindResult
-            if key < CurrentNode.NodeKey:
-                if CurrentNode.LeftChild is None:
-                    FindResult.Node = CurrentNode
-                    FindResult.NodeHasKey = False
-                    FindResult.ToLeft = True
-                    break
+                return self.MakeFindResult(CurrentNode, True, False)
+            if key < CurrentNode.NodeKey and not CurrentNode.LeftChild:
+                return self.MakeFindResult(CurrentNode, False, True)
+            if key < CurrentNode.NodeKey and CurrentNode.LeftChild:
                 CurrentNode = CurrentNode.LeftChild
-            if key > CurrentNode.NodeKey:
-                if CurrentNode.RightChild is None:
-                    FindResult.Node = CurrentNode
-                    FindResult.NodeHasKey = False
-                    FindResult.ToLeft = False
-                    break
+            if key > CurrentNode.NodeKey and not CurrentNode.RightChild:
+                return self.MakeFindResult(CurrentNode, False, False)
+            if key > CurrentNode.NodeKey and CurrentNode.RightChild:
                 CurrentNode = CurrentNode.RightChild
-        return FindResult
+        return BSTFind()
 
     def AddKeyValue(self, key, val):
         """
@@ -68,27 +64,27 @@ class BST:
         return False, если ключ уже есть
         """
         FindResult = self.FindNodeByKey(key)
-        if FindResult.Node is None:
-            self.Root = BSTNode(key=8, val=8, parent=None)
-            return True
         if FindResult.NodeHasKey:
             return False
-        ParentNode = FindResult.Node
+        if self.Root is None:
+            self.Root = BSTNode(key, val, None)
+            return True
         if FindResult.ToLeft:
-            ParentNode.LeftChild = BSTNode(key, val, ParentNode)
+            FindResult.Node.LeftChild = BSTNode(key, val, FindResult.Node)
         if not FindResult.ToLeft:
-            ParentNode.RightChild = BSTNode(key, val, ParentNode)
+            FindResult.Node.RightChild = BSTNode(key, val, FindResult.Node)
+        self.CountNodes += 1
         return True
 
     def FindMaxKey(self, FromNode):
         while FromNode.RightChild is not None:
             FromNode = FromNode.RightChild
-        return FromNode.NodeKey
+        return FromNode
 
     def FindMinKey(self, FromNode):
         while FromNode.LeftChild is not None:
             FromNode = FromNode.LeftChild
-        return FromNode.NodeKey
+        return FromNode
 
     def FinMinMax(self, FromNode, FindMax) -> BSTFind:
         """
@@ -98,77 +94,59 @@ class BST:
             return self.FindMaxKey(FromNode)
         return self.FindMinKey(FromNode)
 
-    def DeleteLeaf(self, ParentNode, Node):
-        if ParentNode.LeftChild == Node:
-            ParentNode.LeftChild = None
-        if ParentNode.RightChild == Node:
-            ParentNode.RightChild = None
+    def FindSuccessorNode(self, node):
+        if node.RightChild is not None:
+            return self.FinMinMax(node.RightChild, False)
+        parent = node.Parent
+        while parent is not None and node == parent.RightChild:
+            node = parent
+            parent = parent.Parent
+        return parent
 
-    def DeleteNodeWithLeftChild(self, ParentNode, Node):
-        if ParentNode.LeftChild == Node:
-            Node.LeftChild.Parent = ParentNode
-            ParentNode.LeftChild = Node.LeftChild
-        if ParentNode.RightChild == Node:
-            Node.LeftChild.Parent = ParentNode
-            ParentNode.RightChild = Node.LeftChild
+    def FindNewNode(self, Node):
+        if Node.LeftChild is None or Node.RightChild is None:
+            return Node
+        if not (Node.LeftChild is None or Node.RightChild is None):
+            return self.FindSuccessorNode(Node)
+        return None
 
-    def DeleteNodeWithRightChild(self, ParentNode, Node):
-        if ParentNode.LeftChild == Node:
-            Node.RightChild.Parent = ParentNode
-            ParentNode.LeftChild = Node.RightChild
-        if ParentNode.RightChild == Node:
-            Node.RightChild.Parent = ParentNode
-            ParentNode.RightChild = Node.RightChild
+    def FindNewChild(self, Node):
+        if Node.LeftChild is not None:
+            return Node.LeftChild
+        if Node.LeftChild is None:
+            return Node.RightChild
+        return None
 
-    def DeleteCommonNode(self, ParentNode, Node):
-        NodeSuccessor = Node.RightChild
-        while NodeSuccessor is not None:
-            NodeSuccessor = NodeSuccessor.LeftChild
-        print('NodeSuccessor', NodeSuccessor)
+    def ConnectParentAndChild(self, NewNode, NewChild):
+        if NewChild is not None:
+            NewChild.Parent = NewNode.Parent
+        if NewNode.Parent is None:
+            self.Root = NewChild
+            return
+        if NewNode == NewNode.Parent.LeftChild:
+            NewNode.Parent.LeftChild = NewChild
+        if NewNode == NewNode.Parent.RightChild:
+            NewNode.Parent.RightChild = NewChild
 
     def DeleteNodeByKey(self, key):
-        """
-        Удаляем узел по ключу.
-        return False, если узел не найден.
-        """
         FoundNode = self.FindNodeByKey(key).Node
-        if FoundNode is None:
+        if FoundNode.NodeKey != key:
             return False
-        if FoundNode.Parent is None:
-            self.Root = None
-            return True
-        # Если нет потомков у узла
-        if not (FoundNode.LeftChild or FoundNode.RightChild):
-            self.DeleteLeaf(FoundNode.Parent, FoundNode)
-            return True
-        # Если у узла один потомок
-        if FoundNode.LeftChild and not FoundNode.RightChild:
-            self.DeleteNodeWithLeftChild(FoundNode.Parent, FoundNode)
-            return True
-        if FoundNode.RightChild and not FoundNode.LeftChild:
-            self.DeleteNodeWithRightChild(FoundNode.Parent, FoundNode)
-            return True
-        # Если два потомка у узла
-        self.DeleteCommonNode(FoundNode.Parent, FoundNode)
-        return True
+        NewNode = self.FindNewNode(FoundNode)
+        NewChild = self.FindNewChild(NewNode)
 
-    def CountNodesOfSubtree(self, FromNode, CountNodes):
-        CurrentCountNodes = CountNodes
-        if FromNode.LeftChild is not None:
-            CurrentCountNodes = self.CountNodesOfSubtree(
-                FromNode.LeftChild, CurrentCountNodes
-            )
-        if FromNode.RightChild is not None:
-            CurrentCountNodes = self.CountNodesOfSubtree(
-                FromNode.RightChild, CurrentCountNodes
-            )
-        return CurrentCountNodes + 1
+        self.ConnectParentAndChild(NewNode, NewChild)
+        if NewNode != FoundNode:
+            FoundNode.NodeKey = NewNode.NodeKey
+            FoundNode.NodeValue = NewNode.NodeValue
+        self.CountNodes -= 1
+        return True
 
     def Count(self):
         """Количество узлов в дереве"""
-        if self.Root is not None:
-            return self.CountNodesOfSubtree(self.Root, 0)
-        return 0
+        if self.CountNodes and self.Root is None:
+            self.CountNodes -= 1
+        return self.CountNodes
 
 
 tree = BST(node=BSTNode(8, 8, None))
