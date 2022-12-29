@@ -140,12 +140,3 @@ class BST:
         if self.CountNodes and self.Root is None:
             self.CountNodes -= 1
         return self.CountNodes
-
-
-tree = BST(node=BSTNode(8, 8, None))
-for key in [4, 12, 2, 6, 1, 3, 5, 7, 10, 9, 11, 14, 13, 15]:
-    tree.AddKeyValue(key, key)
-
-print('count nodes before', tree.Count())
-tree.DeleteNodeByKey(12)
-print('count nodes after', tree.Count())
