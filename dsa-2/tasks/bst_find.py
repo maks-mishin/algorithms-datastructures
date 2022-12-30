@@ -135,8 +135,21 @@ class BST:
         self.CountNodes -= 1
         return True
 
+    def CountNodesOfSubtree(self, FromNode, CountNodes):
+        """Рекурсивный подсчет количества узлов поддерева"""
+        CurrentCountNodes = CountNodes
+        if FromNode.LeftChild is not None:
+            CurrentCountNodes = self.CountNodesOfSubtree(
+                FromNode.LeftChild, CurrentCountNodes
+            )
+        if FromNode.RightChild is not None:
+            CurrentCountNodes = self.CountNodesOfSubtree(
+                FromNode.RightChild, CurrentCountNodes
+            )
+        return CurrentCountNodes + 1
+
     def Count(self):
         """Количество узлов в дереве"""
-        if self.CountNodes and self.Root is None:
-            self.CountNodes -= 1
-        return self.CountNodes
+        if self.Root is not None:
+            return self.CountNodesOfSubtree(self.Root, 0)
+        return 0
