@@ -267,6 +267,31 @@ class TestBST(unittest.TestCase):
 
         self.assertEqual(0, self.bst.Count())
 
+    def test_tree_traversal(self):
+        print('Test InOrder traversal')
+        list_of_nodes = self.bst.DeepAllNodes(0)
+        for node in list_of_nodes:
+            print(node.NodeKey, end=' ')
+        print('')
+
+        print('Test PostOrder traversal')
+        list_of_nodes = self.bst.DeepAllNodes(1)
+        for node in list_of_nodes:
+            print(node.NodeKey, end=' ')
+        print('')
+
+        print('Test PreOrder traversal')
+        list_of_nodes = self.bst.DeepAllNodes(2)
+        for node in list_of_nodes:
+            print(node.NodeKey, end=' ')
+        print('')
+
+        print('Test Wide traversal')
+        list_of_nodes = self.bst.DeepAllNodes(0)
+        for node in list_of_nodes:
+            print(node.NodeKey, end=' ')
+        print('')
+
 
 if __name__ == '__main__':
     unittest.main()

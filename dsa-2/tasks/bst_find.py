@@ -7,6 +7,8 @@ class BSTNode:
         self.LeftChild = None
         self.RightChild = None
 
+    def __str__(self):
+        return f'Node(key={self.NodeKey})'
 
 class BSTFind:
 
@@ -20,7 +22,6 @@ class BST:
 
     def __init__(self, node):
         self.Root = node
-        self.CountNodes = 1
 
     def MakeFindResult(self, Node, HasKey, ToLeft):
         FindResult = BSTFind()
@@ -66,7 +67,6 @@ class BST:
             FindResult.Node.LeftChild = BSTNode(key, val, FindResult.Node)
         if not FindResult.ToLeft:
             FindResult.Node.RightChild = BSTNode(key, val, FindResult.Node)
-        self.CountNodes += 1
         return True
 
     def FindMaxKey(self, FromNode):
@@ -90,11 +90,7 @@ class BST:
     def FindSuccessorNode(self, node):
         if node.RightChild is not None:
             return self.FinMinMax(node.RightChild, False)
-        parent = node.Parent
-        while parent is not None and node == parent.RightChild:
-            node = parent
-            parent = parent.Parent
-        return parent
+        return None
 
     def FindNewNode(self, Node):
         if Node.LeftChild is None or Node.RightChild is None:
@@ -122,17 +118,16 @@ class BST:
             NewNode.Parent.RightChild = NewChild
 
     def DeleteNodeByKey(self, key):
-        FoundNode = self.FindNodeByKey(key).Node
-        if FoundNode.NodeKey != key:
+        Node = self.FindNodeByKey(key).Node
+        if Node.NodeKey != key:
             return False
-        NewNode = self.FindNewNode(FoundNode)
-        NewChild = self.FindNewChild(NewNode)
+        NodeSuccessor = self.FindNewNode(Node)
+        NewChild = self.FindNewChild(NodeSuccessor)
 
-        self.ConnectParentAndChild(NewNode, NewChild)
-        if NewNode != FoundNode:
-            FoundNode.NodeKey = NewNode.NodeKey
-            FoundNode.NodeValue = NewNode.NodeValue
-        self.CountNodes -= 1
+        self.ConnectParentAndChild(NodeSuccessor, NewChild)
+        if NodeSuccessor != Node:
+            Node.NodeKey = NodeSuccessor.NodeKey
+            Node.NodeValue = NodeSuccessor.NodeValue
         return True
 
     def CountNodesOfSubtree(self, FromNode, CountNodes):
@@ -153,3 +148,47 @@ class BST:
         if self.Root is not None:
             return self.CountNodesOfSubtree(self.Root, 0)
         return 0
+
+    def WideAllNodes(self):
+        if self.Root is None:
+            return []
+
+        ListOfNodes = [self.Root]
+        for node in ListOfNodes:
+            if node.LeftChild is not None:
+                ListOfNodes.append(node.LeftChild)
+            if node.RightChild is not None:
+                ListOfNodes.append(node.RightChild)
+        return ListOfNodes
+
+    def DeepAllNodes(self, OrderType):
+        if self.Root is None:
+            return []
+        if OrderType == 0:
+            return self.InOrder([], self.Root)
+        if OrderType == 1:
+            return self.PostOrder([], self.Root)
+        if OrderType == 2:
+            return self.PreOrder([], self.Root)
+        return []
+
+    def InOrder(self, ListOfNodes, Node):
+        if Node:
+            self.InOrder(ListOfNodes, Node.LeftChild)
+            ListOfNodes.append(Node)
+            self.InOrder(ListOfNodes, Node.RightChild)
+        return ListOfNodes
+
+    def PostOrder(self, ListOfNodes, Node):
+        if Node:
+            self.PostOrder(ListOfNodes, Node.LeftChild)
+            self.PostOrder(ListOfNodes, Node.RightChild)
+            ListOfNodes.append(Node)
+        return ListOfNodes
+
+    def PreOrder(self, ListOfNodes, Node):
+        if Node:
+            ListOfNodes.append(Node)
+            self.PostOrder(ListOfNodes, Node.LeftChild)
+            self.PostOrder(ListOfNodes, Node.RightChild)
+        return ListOfNodes
