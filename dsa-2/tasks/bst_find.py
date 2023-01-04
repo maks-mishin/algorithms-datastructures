@@ -162,33 +162,30 @@ class BST:
         return ListOfNodes
 
     def DeepAllNodes(self, OrderType):
-        if self.Root is None:
-            return []
         if OrderType == 0:
             return self.InOrder([], self.Root)
         if OrderType == 1:
             return self.PostOrder([], self.Root)
         if OrderType == 2:
             return self.PreOrder([], self.Root)
-        return []
 
     def InOrder(self, ListOfNodes, Node):
-        if Node:
+        if Node is not None:
             self.InOrder(ListOfNodes, Node.LeftChild)
             ListOfNodes.append(Node)
             self.InOrder(ListOfNodes, Node.RightChild)
         return ListOfNodes
 
     def PostOrder(self, ListOfNodes, Node):
-        if Node:
+        if Node is not None:
             self.PostOrder(ListOfNodes, Node.LeftChild)
             self.PostOrder(ListOfNodes, Node.RightChild)
             ListOfNodes.append(Node)
         return ListOfNodes
 
     def PreOrder(self, ListOfNodes, Node):
-        if Node:
+        if Node is not None:
             ListOfNodes.append(Node)
-            self.PostOrder(ListOfNodes, Node.LeftChild)
-            self.PostOrder(ListOfNodes, Node.RightChild)
+            self.PreOrder(ListOfNodes, Node.LeftChild)
+            self.PreOrder(ListOfNodes, Node.RightChild)
         return ListOfNodes
