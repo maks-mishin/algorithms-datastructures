@@ -1,4 +1,4 @@
-from typing import Optional, Any, Tuple, List
+from typing import Optional, Any, List
 
 
 class BSTNode:
@@ -47,18 +47,18 @@ class BST:
         if self.Root is None:
             return BSTFind()
 
-        CurrentNode = self.Root
-        while CurrentNode is not None:
-            if CurrentNode.NodeKey == key:
-                return self.MakeFindResult(CurrentNode, True, False)
-            if key < CurrentNode.NodeKey and not CurrentNode.LeftChild:
-                return self.MakeFindResult(CurrentNode, False, True)
-            if key < CurrentNode.NodeKey and CurrentNode.LeftChild:
-                CurrentNode = CurrentNode.LeftChild
-            if key > CurrentNode.NodeKey and not CurrentNode.RightChild:
-                return self.MakeFindResult(CurrentNode, False, False)
-            if key > CurrentNode.NodeKey and CurrentNode.RightChild:
-                CurrentNode = CurrentNode.RightChild
+        current_node = self.Root
+        while current_node is not None:
+            if current_node.NodeKey == key:
+                return self.MakeFindResult(current_node, True, False)
+            if key < current_node.NodeKey and not current_node.LeftChild:
+                return self.MakeFindResult(current_node, False, True)
+            if key < current_node.NodeKey and current_node.LeftChild:
+                current_node = current_node.LeftChild
+            if key > current_node.NodeKey and not current_node.RightChild:
+                return self.MakeFindResult(current_node, False, False)
+            if key > current_node.NodeKey and current_node.RightChild:
+                current_node = current_node.RightChild
         return BSTFind()
 
     def AddKeyValue(self, key: int, val: Any) -> bool:
@@ -80,85 +80,85 @@ class BST:
             find_result.Node.RightChild = node_to_insert
         return True
 
-    def FindMaxKey(self, FromNode: Optional[BSTNode]) -> Optional[BSTNode]:
-        while FromNode.RightChild is not None:
-            FromNode = FromNode.RightChild
-        return FromNode
+    def FindMaxKey(self, from_node: Optional[BSTNode]) -> Optional[BSTNode]:
+        while from_node.RightChild is not None:
+            from_node = from_node.RightChild
+        return from_node
 
-    def FindMinKey(self, FromNode: Optional[BSTNode]) -> Optional[BSTNode]:
-        while FromNode.LeftChild is not None:
-            FromNode = FromNode.LeftChild
-        return FromNode
+    def FindMinKey(self, from_node: Optional[BSTNode]) -> Optional[BSTNode]:
+        while from_node.LeftChild is not None:
+            from_node = from_node.LeftChild
+        return from_node
 
     def FinMinMax(self,
-                  FromNode: Optional[BSTNode],
-                  FindMax: bool) -> Optional[BSTNode]:
+                  from_node: Optional[BSTNode],
+                  find_max: bool) -> Optional[BSTNode]:
         """
         Ищем максимальный/минимальный ключ в поддереве.
         """
-        if FindMax:
-            return self.FindMaxKey(FromNode)
-        return self.FindMinKey(FromNode)
+        if find_max:
+            return self.FindMaxKey(from_node)
+        return self.FindMinKey(from_node)
 
     def FindSuccessorNode(self, node) -> Optional[BSTNode]:
         if node.RightChild is not None:
             return self.FinMinMax(node.RightChild, False)
         return None
 
-    def FindNewNode(self, Node):
-        if Node.LeftChild is None or Node.RightChild is None:
-            return Node
-        if not (Node.LeftChild is None or Node.RightChild is None):
-            return self.FindSuccessorNode(Node)
+    def FindNewNode(self, node):
+        if node.LeftChild is None or node.RightChild is None:
+            return node
+        if not (node.LeftChild is None or node.RightChild is None):
+            return self.FindSuccessorNode(node)
         return None
 
-    def FindNewChild(self, Node):
-        if Node.LeftChild is not None:
-            return Node.LeftChild
-        if Node.LeftChild is None:
-            return Node.RightChild
+    def FindNewChild(self, node):
+        if node.LeftChild is not None:
+            return node.LeftChild
+        if node.LeftChild is None:
+            return node.RightChild
         return None
 
-    def ConnectParentAndChild(self, NewNode, NewChild):
-        if NewChild is not None:
-            NewChild.Parent = NewNode.Parent
-        if NewNode.Parent is None:
-            self.Root = NewChild
+    def ConnectParentAndChild(self, new_node, new_child):
+        if new_child is not None:
+            new_child.Parent = new_node.Parent
+        if new_node.Parent is None:
+            self.Root = new_child
             return
-        if NewNode == NewNode.Parent.LeftChild:
-            NewNode.Parent.LeftChild = NewChild
-        if NewNode == NewNode.Parent.RightChild:
-            NewNode.Parent.RightChild = NewChild
+        if new_node == new_node.Parent.LeftChild:
+            new_node.Parent.LeftChild = new_child
+        if new_node == new_node.Parent.RightChild:
+            new_node.Parent.RightChild = new_child
 
     def DeleteNodeByKey(self, key: int) -> bool:
-        Node = self.FindNodeByKey(key).Node
-        if Node.NodeKey != key:
+        node = self.FindNodeByKey(key).Node
+        if node.NodeKey != key:
             return False
-        NodeSuccessor = self.FindNewNode(Node)
-        NewChild = self.FindNewChild(NodeSuccessor)
+        node_successor = self.FindNewNode(node)
+        new_child = self.FindNewChild(node_successor)
 
-        self.ConnectParentAndChild(NodeSuccessor, NewChild)
-        if NodeSuccessor != Node:
-            Node.NodeKey = NodeSuccessor.NodeKey
-            Node.NodeValue = NodeSuccessor.NodeValue
+        self.ConnectParentAndChild(node_successor, new_child)
+        if node_successor != node:
+            node.NodeKey = node_successor.NodeKey
+            node.NodeValue = node_successor.NodeValue
         return True
 
     def _count_nodes_of_subtree(self,
-                                FromNode: Optional[BSTNode],
-                                CountNodes: int):
+                                from_node: Optional[BSTNode],
+                                count_nodes: int):
         """Рекурсивный подсчет количества узлов поддерева"""
-        CurrentCountNodes = CountNodes
-        if FromNode.LeftChild is not None:
-            CurrentCountNodes = self._count_nodes_of_subtree(
-                FromNode.LeftChild, CurrentCountNodes
+        current_count_nodes = count_nodes
+        if from_node.LeftChild is not None:
+            current_count_nodes = self._count_nodes_of_subtree(
+                from_node.LeftChild, current_count_nodes
             )
-        if FromNode.RightChild is not None:
-            CurrentCountNodes = self._count_nodes_of_subtree(
-                FromNode.RightChild, CurrentCountNodes
+        if from_node.RightChild is not None:
+            current_count_nodes = self._count_nodes_of_subtree(
+                from_node.RightChild, current_count_nodes
             )
-        return CurrentCountNodes + 1
+        return current_count_nodes + 1
 
-    def Count(self):
+    def Count(self) -> int:
         """Количество узлов в дереве"""
 
         def _count(node: Optional[BSTNode]):
@@ -168,25 +168,26 @@ class BST:
 
         return _count(self.Root)
 
-    def WideAllNodes(self):
+    def WideAllNodes(self) -> List[BSTNode]:
         if self.Root is None:
             return []
 
-        ListOfNodes = [self.Root]
-        for node in ListOfNodes:
+        result_list_nodes: List[BSTNode] = [self.Root]
+        for node in result_list_nodes:
             if node.LeftChild is not None:
-                ListOfNodes.append(node.LeftChild)
+                result_list_nodes.append(node.LeftChild)
             if node.RightChild is not None:
-                ListOfNodes.append(node.RightChild)
-        return ListOfNodes
+                result_list_nodes.append(node.RightChild)
+        return result_list_nodes
 
-    def DeepAllNodes(self, OrderType):
-        if OrderType == 0:
+    def DeepAllNodes(self, order_type: int) -> Optional[List[BSTNode]]:
+        if order_type == 0:
             return self._get_all_nodes_in_order([], self.Root)
-        if OrderType == 1:
+        if order_type == 1:
             return self._get_all_nodes_post_order([], self.Root)
-        if OrderType == 2:
+        if order_type == 2:
             return self._get_all_nodes_pre_order([], self.Root)
+        return None
 
     def _get_all_nodes_in_order(self,
                                 result_list_nodes: List[BSTNode],

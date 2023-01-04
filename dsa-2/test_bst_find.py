@@ -267,30 +267,33 @@ class TestBST(unittest.TestCase):
 
         self.assertEqual(0, self.bst.Count())
 
-    def test_tree_traversal(self):
-        print('Test InOrder traversal')
-        list_of_nodes = self.bst.DeepAllNodes(0)
-        for node in list_of_nodes:
-            print(node.NodeKey, end=' ')
-        print('')
+    def test_in_order_traversal(self):
+        list_nodes = self.bst.DeepAllNodes(0)
+        self.assertEqual(
+            [3, 4, 5, 6, 7, 9, 17, 20, 22],
+            [node.NodeKey for node in list_nodes]
+        )
 
-        print('Test PostOrder traversal')
-        list_of_nodes = self.bst.DeepAllNodes(1)
-        for node in list_of_nodes:
-            print(node.NodeKey, end=' ')
-        print('')
+    def test_post_order_traversal(self):
+        list_nodes = self.bst.DeepAllNodes(1)
+        self.assertEqual(
+            [3, 5, 7, 6, 4, 20, 22, 17, 9],
+            [node.NodeKey for node in list_nodes]
+        )
 
-        print('Test PreOrder traversal')
-        list_of_nodes = self.bst.DeepAllNodes(2)
-        for node in list_of_nodes:
-            print(node.NodeKey, end=' ')
-        print('')
+    def test_pre_order_traversal(self):
+        list_nodes = self.bst.DeepAllNodes(2)
+        self.assertEqual(
+            [9, 4, 3, 6, 5, 7, 17, 22, 20],
+            [node.NodeKey for node in list_nodes]
+        )
 
-        print('Test Wide traversal')
-        list_of_nodes = self.bst.DeepAllNodes(0)
-        for node in list_of_nodes:
-            print(node.NodeKey, end=' ')
-        print('')
+    def test_wide_traversal(self):
+        list_nodes = self.bst.WideAllNodes()
+        self.assertEqual(
+            [9, 4, 17, 3, 6, 22, 5, 7, 20],
+            [node.NodeKey for node in list_nodes]
+        )
 
 
 if __name__ == '__main__':
