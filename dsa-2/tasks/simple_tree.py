@@ -1,31 +1,34 @@
+from typing import Optional, List, Any
+
+
 class SimpleTreeNode:
 
     def __init__(self, val, parent):
-        self.NodeValue = val
-        self.Parent = parent
-        self.Children = []
-        self.Level = 0
+        self.NodeValue: Any = val
+        self.Parent: Optional[SimpleTreeNode] = parent
+        self.Children: List[SimpleTreeNode] = []
+        self.Level: int = 0
 
 
 class SimpleTree:
 
-    def __init__(self, root):
+    def __init__(self, root: Optional[SimpleTreeNode]):
         self.Root = root
 
-    def AddChild(self, ParentNode, NewChild):
+    def AddChild(self, parent_node, new_child):
         if self.Root is None:
-            self.Root = NewChild
+            self.Root = new_child
             return
-        NewChild.Parent = ParentNode
-        ParentNode.Children.append(NewChild)
-        NewChild.Level = ParentNode.Level + 1
+        new_child.parent = parent_node
+        parent_node.Children.append(new_child)
+        new_child.Level = parent_node.Level + 1
 
-    def DeleteNode(self, NodeToDelete):
-        if NodeToDelete.Parent is None:
+    def DeleteNode(self, node_to_delete):
+        if node_to_delete.parent is None:
             self.Root = None
             return
-        NodeToDelete.Parent.Children.pop(
-            NodeToDelete.Parent.Children.index(NodeToDelete)
+        node_to_delete.parent.Children.pop(
+            node_to_delete.parent.Children.index(node_to_delete)
         )
 
     def GetAllNodes(self):
@@ -33,9 +36,9 @@ class SimpleTree:
             return []
         return [self.Root] + self.GetNodesOfSubtree(self.Root)
 
-    def GetNodesOfSubtree(self, Node):
+    def GetNodesOfSubtree(self, node):
         ListOfNodes = []
-        for childNode in Node.Children:
+        for childNode in node.Children:
             if childNode.Children:
                 ListOfNodes.extend(
                     self.GetNodesOfSubtree(childNode)
@@ -51,9 +54,9 @@ class SimpleTree:
             FoundNodes.append(self.Root)
         return FoundNodes
 
-    def FindNodesByValueOfSubtree(self, Node, val):
+    def FindNodesByValueOfSubtree(self, node, val):
         ListOfNodes = []
-        for childNode in Node.Children:
+        for childNode in node.Children:
             if childNode.Children:
                 ListOfNodes.extend(
                     self.FindNodesByValueOfSubtree(childNode, val)
@@ -62,9 +65,9 @@ class SimpleTree:
                 ListOfNodes.append(childNode)
         return ListOfNodes
 
-    def MoveNode(self, OriginalNode, NewParent):
-        self.DeleteNode(OriginalNode)
-        self.AddChild(NewParent, OriginalNode)
+    def MoveNode(self, original_node, new_parent):
+        self.DeleteNode(original_node)
+        self.AddChild(new_parent, original_node)
         self.SetNodesLevel()
 
     def Count(self):
@@ -81,8 +84,8 @@ class SimpleTree:
         self.Root.Level = 0
         self.SetLevelToOneNode(0, self.Root)
 
-    def SetLevelToOneNode(self, currentLevel, currentNode):
-        for childNode in currentNode.Children:
+    def SetLevelToOneNode(self, current_level, current_node):
+        for childNode in current_node.Children:
             if childNode.Children:
-                self.SetLevelToOneNode(currentLevel + 1, childNode)
-            childNode.Level = currentLevel + 1
+                self.SetLevelToOneNode(current_level + 1, childNode)
+            childNode.Level = current_level + 1

@@ -101,34 +101,34 @@ class BST:
         return self.FindMinKey(from_node)
 
     def FindSuccessorNode(self, node) -> Optional[BSTNode]:
-        if node.RightChild is not None:
-            return self.FinMinMax(node.RightChild, False)
+        if node.right_child is not None:
+            return self.FinMinMax(node.right_child, False)
         return None
 
     def FindNewNode(self, node):
-        if node.LeftChild is None or node.RightChild is None:
+        if node.left_child is None or node.right_child is None:
             return node
-        if not (node.LeftChild is None or node.RightChild is None):
+        if not (node.left_child is None or node.right_child is None):
             return self.FindSuccessorNode(node)
         return None
 
     def FindNewChild(self, node):
-        if node.LeftChild is not None:
-            return node.LeftChild
-        if node.LeftChild is None:
-            return node.RightChild
+        if node.left_child is not None:
+            return node.left_child
+        if node.left_child is None:
+            return node.right_child
         return None
 
     def ConnectParentAndChild(self, new_node, new_child):
         if new_child is not None:
-            new_child.Parent = new_node.Parent
-        if new_node.Parent is None:
+            new_child.parent = new_node.parent
+        if new_node.parent is None:
             self.Root = new_child
             return
-        if new_node == new_node.Parent.LeftChild:
-            new_node.Parent.LeftChild = new_child
-        if new_node == new_node.Parent.RightChild:
-            new_node.Parent.RightChild = new_child
+        if new_node == new_node.parent.left_child:
+            new_node.parent.left_child = new_child
+        if new_node == new_node.parent.right_child:
+            new_node.parent.right_child = new_child
 
     def DeleteNodeByKey(self, key: int) -> bool:
         node = self.FindNodeByKey(key).Node
