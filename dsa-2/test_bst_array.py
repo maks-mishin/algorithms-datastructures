@@ -5,7 +5,7 @@ from tasks.bst_array import aBST
 
 class TestABST(unittest.TestCase):
     def test_constructor(self):
-        test_sizes_tree = [0, 0, 1, 3, 7, 15]
+        test_sizes_tree = [0, 1, 3, 7, 15, 31]
         test_depths = [-1, 0, 1, 2, 3, 4]
         for depth, size in zip(test_depths, test_sizes_tree):
             tree = aBST(depth)

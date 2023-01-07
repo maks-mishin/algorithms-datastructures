@@ -11,5 +11,5 @@ def decimal_to_roman(input_num):
     for decimal, roman in all_roman:
         while input_num >= decimal:
             roman_num += roman
-            decimal_num -= decimal
+            input_num -= decimal
     return roman_num
