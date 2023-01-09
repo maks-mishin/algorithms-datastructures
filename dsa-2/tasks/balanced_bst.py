@@ -105,9 +105,7 @@ class BalancedBST:
         left_subtree_height = self._get_subtree_height(
             root_node.LeftChild, 0
         )
-        print('left_subtree_height', left_subtree_height)
         right_subtree_height = self._get_subtree_height(
             root_node.RightChild, 0
         )
-        print('right_subtree_height', right_subtree_height)
         return abs(left_subtree_height - right_subtree_height) <= 1
