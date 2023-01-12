@@ -3,6 +3,37 @@ import unittest
 from tasks.heap import Heap
 
 
+def display_heap(heap: Heap) -> None:
+    print('Array form')
+    print(heap.HeapArray)
+    print()
+    print('Heap form')
+    n_blanks = 32
+    items_per_row = 1
+    column = 0
+    j = 0
+    dots = '...............................'
+    print(dots + dots)
+    while heap.count_elems > 0:
+        if column == 0:
+            for _ in range(n_blanks):
+                print(' ', end='')
+        print(heap.HeapArray[j], end='')
+        j += 1
+        if j == heap.count_elems:
+            break
+        column += 1
+        if column == items_per_row:
+            n_blanks //= 2
+            items_per_row *= 2
+            column = 0
+            print('')
+        else:
+            for _ in range(n_blanks * 2 - 2):
+                print(' ', end='')
+    print('\n' + dots + dots)
+
+
 class TestHeap(unittest.TestCase):
     def test_add(self):
         """Testing add to existing heap"""
