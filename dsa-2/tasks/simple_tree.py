@@ -19,16 +19,16 @@ class SimpleTree:
         if self.Root is None:
             self.Root = new_child
             return
-        new_child.parent = parent_node
+        new_child.Parent = parent_node
         parent_node.Children.append(new_child)
         new_child.Level = parent_node.Level + 1
 
     def DeleteNode(self, node_to_delete):
-        if node_to_delete.parent is None:
+        if node_to_delete.Parent is None:
             self.Root = None
             return
-        node_to_delete.parent.Children.pop(
-            node_to_delete.parent.Children.index(node_to_delete)
+        node_to_delete.Parent.Children.pop(
+            node_to_delete.Parent.Children.index(node_to_delete)
         )
 
     def GetAllNodes(self):
@@ -89,3 +89,24 @@ class SimpleTree:
             if childNode.Children:
                 self.SetLevelToOneNode(current_level + 1, childNode)
             childNode.Level = current_level + 1
+
+    def _is_even_tree(self, node) -> bool:
+        """
+        @return True, если поддерево с корнем node является четным
+        """
+        count_nodes = len([node] + self.GetNodesOfSubtree(node))
+        if count_nodes % 2 == 0 and node.Parent is not None:
+            return True
+        return False
+    
+    def EvenTrees(self):
+        if self.Count() % 2 != 0:
+            return []
+        
+        list_nodes_to_delete_edges = []
+        for node in self.GetAllNodes():
+            if not self._is_even_tree(node):
+                continue
+            list_nodes_to_delete_edges.append(node.Parent)
+            list_nodes_to_delete_edges.append(node)
+        return list_nodes_to_delete_edges
