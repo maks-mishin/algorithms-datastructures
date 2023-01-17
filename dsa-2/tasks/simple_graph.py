@@ -3,7 +3,7 @@ from typing import List, Any, Union
 
 class Vertex:
 
-    def __init__(self, val):
+    def __init__(self, val) -> None:
         self.Value = val
 
     def __repr__(self):
@@ -12,13 +12,15 @@ class Vertex:
 
 class SimpleGraph:
 
-    def __init__(self, size):
+    def __init__(self, size) -> None:
         self.max_vertex = size
         self.m_adjacency = [[0] * size for _ in range(size)]
         self.vertex: List[Union[Vertex, None]] = [None] * size
         self.vertex_count = 0
 
     def AddVertex(self, value: Any) -> None:
+        if self.vertex_count == self.max_vertex:
+            return
         index_new_vertex = self.vertex.index(None)
         self.vertex[index_new_vertex] = Vertex(value)
         self.vertex_count += 1
