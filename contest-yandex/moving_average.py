@@ -1,7 +1,8 @@
+from typing import List
 import unittest
 
 
-def moving_average(timeseries: list, K: int) -> list:
+def moving_average(timeseries: List[int], K: int) -> list:
     result = []
     for begin_index in range(0, len(timeseries) - K + 1):
         end_index = begin_index + K
