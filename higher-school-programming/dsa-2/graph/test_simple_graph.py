@@ -1,5 +1,5 @@
 import unittest
-from tasks.simple_graph import SimpleGraph
+from simple_graph import SimpleGraph
 
 
 def make_test_graph() -> SimpleGraph:

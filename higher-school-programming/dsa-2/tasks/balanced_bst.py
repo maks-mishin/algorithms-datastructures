@@ -50,23 +50,23 @@ class BalancedBST:
         return key_index
 
     def GenerateTree(self, array: List[int]) -> Optional[List[int]]:
-        def _generate_tree(array: List[int],
-                           result_array: List[int],
-                           parent: Optional[BSTNode]) -> Optional[BSTNode]:
-            if not array:
+        def _generate_subtree(subarray: List[int],
+                              result_array: List[int],
+                              parent: Optional[BSTNode]) -> Optional[BSTNode]:
+            if not subarray:
                 return
-            index_mid_element = len(array) // 2
-            self.AddKey(array[index_mid_element])
+            index_mid_element = len(subarray) // 2
+            self.AddKey(subarray[index_mid_element])
             node = BSTNode(
-                key=array[index_mid_element],
+                key=subarray[index_mid_element],
                 parent=parent
             )
             node.Level = parent.Level + 1
-            node.LeftChild = _generate_tree(
-                array[:index_mid_element], result_array, node
+            node.LeftChild = _generate_subtree(
+                subarray[:index_mid_element], result_array, node
             )
-            node.RightChild = _generate_tree(
-                array[index_mid_element + 1:], result_array, node
+            node.RightChild = _generate_subtree(
+                subarray[index_mid_element + 1:], result_array, node
             )
             return node
 

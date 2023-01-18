@@ -1,8 +1,8 @@
-#include <iostream>
 #include <list>
 #include <numeric>
 #include "unit_test_framework.h"
 
+// TODO: simplify solution
 auto GetNewPeoplePosition(std::list<int>& peoples, std::list<int>::iterator& position,
                           const int step) {
     auto newPosition = position;
