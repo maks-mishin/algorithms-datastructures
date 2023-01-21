@@ -29,12 +29,12 @@ class Stack:
         popped_node = self.head.next
         self.head.next = popped_node.next
         self.count -= 1
-        return popped_node.value
+        return popped_node.Value
 
     def peek(self):
         if self.count == 0:
             return None
-        return self.head.next.value
+        return self.head.next.Value
 
 
 class Queue:

@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.heap import Heap
+from heap import Heap
 
 
 def display_heap(heap: Heap) -> None:

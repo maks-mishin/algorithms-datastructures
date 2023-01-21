@@ -58,10 +58,10 @@ class OrderedList:
         node = self.head
         while (
                 node.next is not None and
-                self.compare(node.value, new_node.value) <= 0
+                self.compare(node.Value, new_node.Value) <= 0
         ):
             node = node.next
-        if self.compare(node.value, new_node.value) <= 0:
+        if self.compare(node.Value, new_node.Value) <= 0:
             self.insert_after(node, new_node)
             return
         self.insert_before(node, new_node)
@@ -70,10 +70,10 @@ class OrderedList:
         node = self.head
         while (
                 node.next is not None and
-                self.compare(node.value, new_node.value) >= 0
+                self.compare(node.Value, new_node.Value) >= 0
         ):
             node = node.next
-        if self.compare(node.value, new_node.value) <= 0:
+        if self.compare(node.Value, new_node.Value) <= 0:
             self.insert_before(node, new_node)
             return
         self.insert_after(node, new_node)
@@ -92,11 +92,11 @@ class OrderedList:
     def find(self, val):
         node = self.head
         while node is not None:
-            if node.value > val and self.is_ascending():
+            if node.Value > val and self.is_ascending():
                 return None
-            if node.value < val and not self.is_ascending():
+            if node.Value < val and not self.is_ascending():
                 return None
-            if node.value == val:
+            if node.Value == val:
                 return node
             node = node.next
         return None

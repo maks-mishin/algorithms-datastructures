@@ -7,7 +7,7 @@ from test_linked_list import make_list_from_linked_list
 class TestBidirectList(unittest.TestCase):
     def test_node(self):
         n1 = Node(14)
-        self.assertEqual(n1.value, 14)
+        self.assertEqual(n1.Value, 14)
         self.assertIsNone(n1.prev)
         self.assertIsNone(n1.next)
 
@@ -20,8 +20,8 @@ class TestBidirectList(unittest.TestCase):
     def test_add_in_tail(self):
         s_list = LinkedList2()
         s_list.add_in_tail(Node(14))
-        self.assertEqual(s_list.head.value, 14)
-        self.assertEqual(s_list.tail.value, 14)
+        self.assertEqual(s_list.head.Value, 14)
+        self.assertEqual(s_list.tail.Value, 14)
         self.assertEqual(s_list.len(), 1)
         self.assertEqual(
             make_list_from_linked_list(s_list), [14]
@@ -29,8 +29,8 @@ class TestBidirectList(unittest.TestCase):
 
         s_list.add_in_tail(Node(16))
         s_list.add_in_tail(Node(10))
-        self.assertEqual(s_list.head.value, 14)
-        self.assertEqual(s_list.tail.value, 10)
+        self.assertEqual(s_list.head.Value, 14)
+        self.assertEqual(s_list.tail.Value, 10)
         self.assertEqual(s_list.len(), 3)
         self.assertEqual(
             make_list_from_linked_list(s_list), [14, 16, 10]
@@ -39,8 +39,8 @@ class TestBidirectList(unittest.TestCase):
     def test_add_in_head(self):
         s_list = LinkedList2()
         s_list.add_in_head(Node(14))
-        self.assertEqual(s_list.head.value, 14)
-        self.assertEqual(s_list.tail.value, 14)
+        self.assertEqual(s_list.head.Value, 14)
+        self.assertEqual(s_list.tail.Value, 14)
         self.assertEqual(s_list.len(), 1)
         self.assertEqual(
             make_list_from_linked_list(s_list), [14]
@@ -48,8 +48,8 @@ class TestBidirectList(unittest.TestCase):
 
         s_list.add_in_head(Node(16))
         s_list.add_in_head(Node(10))
-        self.assertEqual(s_list.head.value, 10)
-        self.assertEqual(s_list.tail.value, 14)
+        self.assertEqual(s_list.head.Value, 10)
+        self.assertEqual(s_list.tail.Value, 14)
         self.assertEqual(s_list.len(), 3)
         self.assertEqual(
             make_list_from_linked_list(s_list), [10, 16, 14]
@@ -81,7 +81,7 @@ class TestBidirectList(unittest.TestCase):
         s_list.add_in_tail(Node(14))
         s_list.add_in_tail(Node(15))
         s_list.add_in_tail(Node(14))
-        self.assertEqual(s_list.find(14).value, 14)
+        self.assertEqual(s_list.find(14).Value, 14)
 
     def test_find_all_nodes(self):
         s_list = LinkedList2()
@@ -95,7 +95,7 @@ class TestBidirectList(unittest.TestCase):
         s_list.add_in_tail(Node(128))
 
         result_list = [
-            node.value for node in s_list.find_all(128)
+            node.Value for node in s_list.find_all(128)
         ]
         self.assertEqual(result_list, [128, 128, 128, 128])
 
@@ -128,8 +128,8 @@ class TestBidirectList(unittest.TestCase):
         self.assertEqual(
             make_list_from_linked_list(s_list), [second]
         )
-        self.assertEqual(s_list.head.value, second)
-        self.assertEqual(s_list.tail.value, second)
+        self.assertEqual(s_list.head.Value, second)
+        self.assertEqual(s_list.tail.Value, second)
 
         s_list = LinkedList2()
         first, second = 12, 14
@@ -139,8 +139,8 @@ class TestBidirectList(unittest.TestCase):
         self.assertEqual(
             make_list_from_linked_list(s_list), [first]
         )
-        self.assertEqual(s_list.head.value, first)
-        self.assertEqual(s_list.tail.value, first)
+        self.assertEqual(s_list.head.Value, first)
+        self.assertEqual(s_list.tail.Value, first)
 
     def test_delete_all_nodes(self):
         s_list = LinkedList2()
@@ -160,8 +160,8 @@ class TestBidirectList(unittest.TestCase):
             make_list_from_linked_list(s_list),
             [12, 128, 128, 128]
         )
-        self.assertEqual(s_list.head.value, 12)
-        self.assertEqual(s_list.tail.value, 128)
+        self.assertEqual(s_list.head.Value, 12)
+        self.assertEqual(s_list.tail.Value, 128)
         self.assertEqual(s_list.len(), 4)
 
     def test_insert(self):
@@ -170,31 +170,31 @@ class TestBidirectList(unittest.TestCase):
         self.assertEqual(
             make_list_from_linked_list(s_list), [12]
         )
-        self.assertEqual(s_list.head.value, 12)
-        self.assertEqual(s_list.tail.value, 12)
+        self.assertEqual(s_list.head.Value, 12)
+        self.assertEqual(s_list.tail.Value, 12)
 
         s_list.insert(None, Node(14))
         self.assertEqual(
             make_list_from_linked_list(s_list), [12, 14]
         )
-        self.assertEqual(s_list.head.value, 12)
-        self.assertEqual(s_list.tail.value, 14)
+        self.assertEqual(s_list.head.Value, 12)
+        self.assertEqual(s_list.tail.Value, 14)
 
         s_list.insert(Node(12), Node(77))
         self.assertEqual(
             make_list_from_linked_list(s_list),
             [12, 77, 14]
         )
-        self.assertEqual(s_list.head.value, 12)
-        self.assertEqual(s_list.tail.value, 14)
+        self.assertEqual(s_list.head.Value, 12)
+        self.assertEqual(s_list.tail.Value, 14)
 
         s_list.insert(Node(14), Node(77))
         self.assertEqual(
             make_list_from_linked_list(s_list),
             [12, 77, 14, 77]
         )
-        self.assertEqual(s_list.head.value, 12)
-        self.assertEqual(s_list.tail.value, 77)
+        self.assertEqual(s_list.head.Value, 12)
+        self.assertEqual(s_list.tail.Value, 77)
 
 
 if __name__ == '__main__':

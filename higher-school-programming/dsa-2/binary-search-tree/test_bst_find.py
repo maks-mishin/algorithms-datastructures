@@ -1,7 +1,7 @@
 import random
 import unittest
 
-from tasks.bst_find import BST, BSTFind, BSTNode
+from bst_find import BST, BSTFind, BSTNode
 
 
 class TestBST(unittest.TestCase):

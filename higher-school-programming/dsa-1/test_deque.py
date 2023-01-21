@@ -6,7 +6,7 @@ from tasks.deque import Node, Deque
 def check_elem_in_deque(deq: Deque, val) -> bool:
     node = deq.head.next
     while isinstance(node, Node):
-        if node.value == val:
+        if node.Value == val:
             return True
         node = node.next
     return False
@@ -16,7 +16,7 @@ def make_list_from_deq(deq: Deque) -> list:
     result_list = []
     node = deq.head.next
     while isinstance(node, Node):
-        result_list.append(node.value)
+        result_list.append(node.Value)
         node = node.next
     result_list.pop()
     return result_list

@@ -8,12 +8,12 @@ def print_bidirectional_list_dummy(s_list: DoublyLinkedList):
     node = s_list.head.next
     while isinstance(node, Node):
         prev, next = node.prev, node.next
-        print(prev.value if prev is not None else None,
+        print(prev.Value if prev is not None else None,
               '<--',
-              node.value if node is not None else None, end=' | ')
-        print(node.value if node is not None else None,
+              node.Value if node is not None else None, end=' | ')
+        print(node.Value if node is not None else None,
               '-->',
-              next.value if next is not None else None)
+              next.Value if next is not None else None)
         node = node.next
 
 
@@ -22,12 +22,12 @@ def print_bidirectional_list(s_list: LinkedList2):
     node = s_list.head
     while node is not None:
         prev, next = node.prev, node.next
-        print(prev.value if prev is not None else None,
+        print(prev.Value if prev is not None else None,
               '<--',
-              node.value if node is not None else None, end=' | ')
-        print(node.value if node is not None else None,
+              node.Value if node is not None else None, end=' | ')
+        print(node.Value if node is not None else None,
               '-->',
-              next.value if next is not None else None)
+              next.Value if next is not None else None)
         node = node.next
 
 def print_all_nodes(s_list: LinkedList):
@@ -37,5 +37,5 @@ def print_all_nodes(s_list: LinkedList):
         if node.next is None:
             print(node.value, '-->', node.next)
         else:
-            print(node.value, '-->', node.next.value)
+            print(node.value, '-->', node.next.Value)
         node = node.next

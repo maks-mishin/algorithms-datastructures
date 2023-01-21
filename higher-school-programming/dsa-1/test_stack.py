@@ -7,13 +7,13 @@ class TestStack(unittest.TestCase):
     def test_constructor(self):
         stack = Stack()
         self.assertEqual(stack.size(), 0)
-        self.assertIsNone(stack.head.value)
+        self.assertIsNone(stack.head.Value)
         self.assertIsNone(stack.tail)
 
     def test_push(self):
         stack = Stack()
         stack.push(14)
-        self.assertEqual(stack.head.next.value, 14)
+        self.assertEqual(stack.head.next.Value, 14)
         stack.push(16)
         self.assertEqual(stack.size(), 2)
 

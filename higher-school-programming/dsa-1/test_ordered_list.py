@@ -9,7 +9,7 @@ class TestOrderedList(unittest.TestCase):
         ol = OrderedList(True)
         self.assertTrue(ol.is_ascending())
         self.assertEqual(
-            [node.value for node in ol.get_all()], []
+            [node.Value for node in ol.get_all()], []
         )
         self.assertEqual(ol.len(), 0)
         self.assertIsNone(ol.head)
@@ -18,7 +18,7 @@ class TestOrderedList(unittest.TestCase):
         ol = OrderedList(True)
         self.assertTrue(ol.is_ascending())
         self.assertEqual(
-            [node.value for node in ol.get_all()], []
+            [node.Value for node in ol.get_all()], []
         )
         self.assertEqual(ol.len(), 0)
 
@@ -41,7 +41,7 @@ class TestOrderedList(unittest.TestCase):
             ol.add(new_value)
             compare_list.append(new_value)
         self.assertEqual(
-            [node.value for node in ol.get_all()],
+            [node.Value for node in ol.get_all()],
             sorted(compare_list)
         )
         self.assertEqual(ol.len(), len(compare_list))
@@ -54,7 +54,7 @@ class TestOrderedList(unittest.TestCase):
             ol.add(new_value)
             compare_list.append(new_value)
         self.assertEqual(
-            [node.value for node in ol.get_all()],
+            [node.Value for node in ol.get_all()],
             list(reversed(sorted(compare_list)))
         )
         self.assertEqual(ol.len(), len(compare_list))
@@ -62,20 +62,20 @@ class TestOrderedList(unittest.TestCase):
     def test_find_asc(self):
         ol = OrderedList(True)
         ol.add(14)
-        self.assertEqual(ol.find(14).value, 14)
+        self.assertEqual(ol.find(14).Value, 14)
         self.assertIsNone(ol.find(15))
         ol.add(18)
         ol.add(17)
-        self.assertEqual(ol.find(18).value, 18)
+        self.assertEqual(ol.find(18).Value, 18)
 
     def test_find_desc(self):
         ol = OrderedList(False)
         ol.add(14)
-        self.assertEqual(ol.find(14).value, 14)
+        self.assertEqual(ol.find(14).Value, 14)
         self.assertIsNone(ol.find(15))
         ol.add(18)
         ol.add(17)
-        self.assertEqual(ol.find(18).value, 18)
+        self.assertEqual(ol.find(18).Value, 18)
 
     def test_delete_asc(self):
         ol = OrderedList(True)

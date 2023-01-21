@@ -41,14 +41,14 @@ class Deque:
     def removeFront(self):
         if self.count == 0:
             return None
-        front_value = self.head.next.value
+        front_value = self.head.next.Value
         self.delete_node(self.head.next)
         return front_value
 
     def removeTail(self):
         if self.count == 0:
             return None
-        tail_value = self.tail.prev.value
+        tail_value = self.tail.prev.Value
         self.delete_node(self.tail.prev)
         return tail_value
 

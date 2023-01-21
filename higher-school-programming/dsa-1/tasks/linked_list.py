@@ -23,7 +23,7 @@ class LinkedList:
         """Return the found node with given value"""
         node = self.head
         while node is not None:
-            if node.value == val:
+            if node.Value == val:
                 return node
             node = node.next
         return None
@@ -33,7 +33,7 @@ class LinkedList:
         result_list = []
         node = self.head
         while node is not None:
-            if node.value == val:
+            if node.Value == val:
                 result_list.append(node)
             node = node.next
         return result_list
@@ -98,12 +98,12 @@ class LinkedList:
             node = node.next
 
             if (
-                    prev_node.value == after_node.value and
+                    prev_node.Value == after_node.value and
                     prev_node == self.tail
             ):
                 new_node.next = node
                 prev_node.next = new_node
                 self.tail = new_node
-            if prev_node.value == after_node.value:
+            if prev_node.Value == after_node.value:
                 new_node.next = node
                 prev_node.next = new_node

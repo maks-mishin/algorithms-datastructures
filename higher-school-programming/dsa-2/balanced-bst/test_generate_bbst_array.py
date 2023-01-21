@@ -1,7 +1,7 @@
 import unittest
 from random import shuffle
 
-from tasks.generate_bbst_array import GenerateBBSTArray
+from generate_bbst_array import GenerateBBSTArray
 
 
 class TestGenerateBBSTArray(unittest.TestCase):

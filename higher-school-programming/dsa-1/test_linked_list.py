@@ -8,7 +8,7 @@ def make_list_from_linked_list(s_list) -> list:
     result_list = []
     node = s_list.head
     while node is not None:
-        result_list.append(node.value)
+        result_list.append(node.Value)
         node = node.next
     return result_list
 
@@ -46,7 +46,7 @@ class TestLinkedList(unittest.TestCase):
         s_list.add_in_tail(Node(12))
         s_list.add_in_tail(Node(55))
         s_list.add_in_tail(Node(128))
-        self.assertEqual(s_list.find(55).value, 55)
+        self.assertEqual(s_list.find(55).Value, 55)
 
     def test_find_all_nodes(self):
         s_list = LinkedList()
@@ -60,7 +60,7 @@ class TestLinkedList(unittest.TestCase):
         s_list.add_in_tail(Node(128))
 
         result_list = [
-            node.value for node in s_list.find_all(128)
+            node.Value for node in s_list.find_all(128)
         ]
         self.assertEqual(result_list, [128, 128, 128, 128])
 

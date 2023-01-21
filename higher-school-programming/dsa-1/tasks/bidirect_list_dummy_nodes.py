@@ -21,7 +21,7 @@ class DoublyLinkedList:
         """Return the found node with given value"""
         node = self.head.next
         while isinstance(node, Node):
-            if node.value == val:
+            if node.Value == val:
                 return node
             node = node.next
         return None
@@ -31,7 +31,7 @@ class DoublyLinkedList:
         result_list = []
         node = self.head.next
         while isinstance(node, Node):
-            if node.value == val:
+            if node.Value == val:
                 result_list.append(node)
             node = node.next
         return result_list
@@ -82,7 +82,7 @@ class DoublyLinkedList:
 
         node = self.head.next
         while isinstance(node, Node):
-            if node.value != after_node.value:
+            if node.Value != after_node.value:
                 node = node.next
                 continue
             self.insert_after(node, new_node)

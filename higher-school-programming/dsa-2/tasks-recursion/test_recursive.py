@@ -1,7 +1,7 @@
 import unittest
 
-from tasks.find_second_max_elem import find_second_largest_elem
-from tasks.balanced_parentheses import \
+from find_second_max_elem import find_second_largest_elem
+from balanced_parentheses import \
     generate_all_correct_brackets_sequences
 
 
