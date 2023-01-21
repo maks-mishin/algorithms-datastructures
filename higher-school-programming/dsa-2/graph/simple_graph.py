@@ -5,9 +5,10 @@ class Vertex:
 
     def __init__(self, val) -> None:
         self.Value = val
+        self.hit = False
 
     def __repr__(self):
-        return f'Vertex(val={self.Value})'
+        return f'Vertex(val={self.Value}, hit={self.hit})'
 
 
 class SimpleGraph:
