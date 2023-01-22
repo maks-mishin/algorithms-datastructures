@@ -6,6 +6,7 @@ class Vertex:
     def __init__(self, val) -> None:
         self.Value = val
         self.hit = False
+        self.index = None
 
     def __repr__(self):
         return f'Vertex(val={self.Value}, hit={self.hit})'
@@ -22,7 +23,9 @@ class SimpleGraph:
         if self.vertex.count(None) == 0:
             return
         index_new_vertex = self.vertex.index(None)
-        self.vertex[index_new_vertex] = Vertex(value)
+        new_vertex = Vertex(value)
+        new_vertex.index = index_new_vertex
+        self.vertex[index_new_vertex] = new_vertex
 
     def RemoveVertex(self, v: int) -> None:
         for i in range(self.max_vertex):
@@ -44,26 +47,43 @@ class SimpleGraph:
         return '\n'.join(
             [' '.join([str(v) for v in row]) for row in self.m_adjacency]
         )
-    
+
     def _reset_vertices_hit(self):
-        for i, vert in enumerate(self.vertex):
+        """
+        Reset
+        :return: None
+        """
+        for vert in self.vertex:
             if vert is not None:
-                self.vertex[i].hit = False
-        
+                vert.hit = False
+
+    def _get_adj_vertex(self, v_from):
+        """
+        Get adjacent vertex index
+        :param v_from: current vertex index
+        :return: index of adjacent vertex not visited
+        """
+        for v in range(self.max_vertex):
+            if self.IsEdge(v_from, v) and not self.vertex[v].hit:
+                return v
+        return None
+
     def _depth_first_search(self, v_from, v_to, result):
         if not self.vertex[v_from].hit:
             self.vertex[v_from].hit = True
             result.append(self.vertex[v_from])
-            if self.IsEdge(v_from, v_to):
-                result.append(self.vertex[v_to])
-                return result
-        for i in range(self.max_vertex):
-            if self.m_adjacency[v_from][i] and not self.vertex[i].hit:
-                return self._depth_first_search(i, v_to, result)
+        if self.IsEdge(v_from, v_to):
+            result.append(self.vertex[v_to])
+            return result
+        adj_vertex = self._get_adj_vertex(v_from)
+        if adj_vertex is not None:
+            return self._depth_first_search(adj_vertex, v_to, result)
         result.pop()
-        if not len(result):
+        if not result:
             return []
-        return self._depth_first_search(len(result)-1, v_to, result)
+        return self._depth_first_search(
+            result[len(result) - 1].index, v_to, result
+        )
 
     def DepthFirstSearch(self, v_from, v_to):
         self._reset_vertices_hit()

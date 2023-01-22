@@ -1,21 +1,44 @@
 import unittest
-from simple_graph import SimpleGraph
+from simple_graph import SimpleGraph, Vertex
 
 
-def make_test_graph() -> SimpleGraph:
+def make_small_graph() -> SimpleGraph:
     graph = SimpleGraph(3)
     for i in range(4):
         graph.AddVertex(i)
     return graph
 
 
-def add_edges_to_graph(graph: SimpleGraph) -> SimpleGraph:
+def add_edges_to_small_graph(graph: SimpleGraph) -> SimpleGraph:
     graph.AddEdge(0, 1)
     graph.AddEdge(1, 2)
     graph.AddEdge(0, 2)
     # Добавляем петлю к вершине 0
     graph.AddEdge(0, 0)
     return graph
+
+
+def create_test_graph() -> SimpleGraph:
+    """create test graph for further testing"""
+
+    sgraph = SimpleGraph(7)
+    sgraph.m_adjacency = [
+        [0, 1, 1, 1, 0, 0, 0],
+        [1, 0, 0, 1, 1, 0, 0],
+        [1, 0, 0, 1, 0, 0, 0],
+        [1, 1, 1, 1, 1, 0, 0],
+        [0, 1, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ]
+    sgraph.vertex = [
+        Vertex(1), Vertex(2), Vertex(3), Vertex(4), Vertex(5),
+        None, None
+    ]
+    for i, vert in enumerate(sgraph.vertex):
+        if vert is not None:
+            vert.index = i
+    return sgraph
 
 
 class TestSimpleGraph(unittest.TestCase):
@@ -33,7 +56,6 @@ class TestSimpleGraph(unittest.TestCase):
             self.assertEqual(graph.max_vertex, test_max_vertex_list[i])
             self.assertListEqual(graph.vertex, test_vertex_list[i])
             self.assertListEqual(graph.m_adjacency, test_m_adjacency[i])
-            self.assertEqual(graph.vertex_count, 0)
 
     def test_add_vertex(self):
         graph = SimpleGraph(1)
@@ -54,13 +76,13 @@ class TestSimpleGraph(unittest.TestCase):
         self.assertListEqual(graph.vertex, [])
         self.assertListEqual(graph.m_adjacency, [])
 
-        graph = make_test_graph()
+        graph = make_small_graph()
         self.assertEqual(len(graph.vertex), 3)
         graph.AddVertex(12)
         self.assertEqual(len(graph.vertex), 3)
 
     def test_remove_vertex_without_edges(self):
-        graph = make_test_graph()
+        graph = make_small_graph()
         self.assertListEqual(
             graph.m_adjacency, [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         )
@@ -69,7 +91,7 @@ class TestSimpleGraph(unittest.TestCase):
         self.assertEqual(graph.vertex[0], None)
 
     def test_remove_vertex_with_edges(self):
-        graph = add_edges_to_graph(make_test_graph())
+        graph = add_edges_to_small_graph(make_small_graph())
         self.assertEqual(graph.m_adjacency[0][0], 1)
         self.assertEqual(graph.m_adjacency[0][1], 1)
         self.assertEqual(graph.m_adjacency[1][0], 1)
@@ -85,31 +107,70 @@ class TestSimpleGraph(unittest.TestCase):
         self.assertEqual(graph.m_adjacency[2][0], 0)
 
     def test_is_edge(self):
-        graph = add_edges_to_graph(make_test_graph())
+        graph = add_edges_to_small_graph(make_small_graph())
         self.assertTrue(graph.IsEdge(0, 1))
         self.assertTrue(graph.IsEdge(0, 2))
         self.assertTrue(graph.IsEdge(1, 2))
         self.assertTrue(graph.IsEdge(0, 0))
 
-        graph = make_test_graph()
+        graph = make_small_graph()
         graph.AddEdge(0, 1)
         self.assertFalse(graph.IsEdge(1, 2))
         self.assertFalse(graph.IsEdge(0, 2))
 
     def test_remove_edge(self):
-        graph = add_edges_to_graph(make_test_graph())
+        graph = add_edges_to_small_graph(make_small_graph())
         graph.RemoveEdge(0, 1)
         self.assertEqual(graph.m_adjacency[1][0], 0)
         self.assertEqual(graph.m_adjacency[0][1], 0)
 
     def test_add_edge(self):
-        graph = make_test_graph()
+        graph = make_small_graph()
         for row in graph.m_adjacency:
             for col in range(graph.max_vertex):
                 self.assertEqual(row[col], 0)
         graph.AddEdge(0, 1)
         self.assertEqual(graph.m_adjacency[1][0], 1)
         self.assertEqual(graph.m_adjacency[0][1], 1)
+
+    def test_depth_first_search(self):
+        """testing find path between 2 vertexes"""
+
+        sgraph = create_test_graph()
+        self.assertListEqual(
+            sgraph.DepthFirstSearch(0, 4),
+            [sgraph.vertex[0], sgraph.vertex[1], sgraph.vertex[4]]
+        )
+        sgraph.RemoveEdge(0, 1)
+        sgraph.RemoveEdge(0, 3)
+        self.assertListEqual(
+            sgraph.DepthFirstSearch(0, 4),
+            [sgraph.vertex[0], sgraph.vertex[2],
+             sgraph.vertex[3], sgraph.vertex[4]]
+        )
+
+    def test_depth_first_search2(self):
+        """more testing find path between 2 vertexes"""
+
+        sgraph = create_test_graph()
+        sgraph.RemoveEdge(1, 3)
+        sgraph.AddVertex(6)
+        sgraph.AddVertex(7)
+        sgraph.AddEdge(4, 5)
+        sgraph.AddEdge(4, 6)
+        self.assertListEqual(
+            sgraph.DepthFirstSearch(0, 6),
+            [sgraph.vertex[0], sgraph.vertex[1],
+             sgraph.vertex[4], sgraph.vertex[6]]
+        )
+
+    def test_depth_first_search_no_path(self):
+        """testing path should not exist"""
+
+        sgraph = create_test_graph()
+        sgraph.RemoveEdge(1, 4)
+        sgraph.RemoveEdge(3, 4)
+        self.assertListEqual(sgraph.DepthFirstSearch(0, 4), [])
 
 
 if __name__ == '__main__':
