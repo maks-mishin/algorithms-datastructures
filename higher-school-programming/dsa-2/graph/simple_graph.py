@@ -1,4 +1,5 @@
 from typing import List, Any, Union
+import queue
 
 
 class Vertex:
@@ -7,6 +8,7 @@ class Vertex:
         self.Value = val
         self.hit = False
         self.index = None
+        self.index_prev = None
 
     def __repr__(self):
         return f'Vertex(val={self.Value}, hit={self.hit})'
@@ -18,6 +20,7 @@ class SimpleGraph:
         self.max_vertex = size
         self.m_adjacency = [[0] * size for _ in range(size)]
         self.vertex: List[Union[Vertex, None]] = [None] * size
+        self.queue = queue.Queue()
 
     def AddVertex(self, value: Any) -> None:
         if self.vertex.count(None) == 0:
@@ -49,10 +52,6 @@ class SimpleGraph:
         )
 
     def _reset_vertices_hit(self):
-        """
-        Reset
-        :return: None
-        """
         for vert in self.vertex:
             if vert is not None:
                 vert.hit = False
@@ -88,3 +87,32 @@ class SimpleGraph:
     def DepthFirstSearch(self, v_from, v_to):
         self._reset_vertices_hit()
         return self._depth_first_search(v_from, v_to, [])
+        
+    def _make_min_path(self, v_to):
+        path_vertices = [self.vertex[v_to]]
+        index_prev = self.vertex[v_to].index_prev
+        while index_prev is not None:
+            path_vertices.insert(0, self.vertex[index_prev])
+            index_prev = self.vertex[index_prev].index_prev
+        return path_vertices
+        
+    def _breafth_first_search(self, v_from, v_to):
+        adj_vert_indexes = list(filter(
+            lambda v: self.IsEdge(v_from, v) and not self.vertex[v].hit,
+            list(range(self.max_vertex))
+        ))
+        for v in adj_vert_indexes:
+            if v == v_to:
+                self.vertex[v_to].index_prev = v_from
+                return self._make_min_path(v_to)
+            self.vertex[v].hit = True
+            self.queue.put(self.vertex[v])
+            self.vertex[v].index_prev = v_from
+        if self.queue.qsize() == 0:
+            return []
+        return self._breafth_first_search(self.queue.get().index, v_to)
+
+    def BreadthFirstSearch(self, v_from, v_to):
+        self._reset_vertices_hit()
+        self.vertex[v_from].hit = True
+        return self._breafth_first_search(v_from, v_to)
