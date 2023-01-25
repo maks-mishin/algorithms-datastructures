@@ -8,10 +8,10 @@ class Vertex:
         self.Value = val
         self.hit = False
         self.index = None
-        self.index_prev = None
+        self.prev: Optional[int] = None
 
     def __repr__(self):
-        return f'Vertex(val={self.Value}, hit={self.hit})'
+        return f'Vertex(val={self.Value}, hit={self.hit}, prev={self.prev})'
 
 
 class SimpleGraph:
@@ -36,7 +36,10 @@ class SimpleGraph:
         self.vertex[v] = None
 
     def IsEdge(self, v1: int, v2: int) -> bool:
-        return self.m_adjacency[v1][v2] == self.m_adjacency[v2][v1] == 1
+        return (
+            self.m_adjacency[v1][v2]
+            == self.m_adjacency[v2][v1] == 1
+        )
 
     def AddEdge(self, v1: int, v2: int) -> None:
         self.m_adjacency[v1][v2] = 1
@@ -55,6 +58,7 @@ class SimpleGraph:
         for vert in self.vertex:
             if vert is not None:
                 vert.hit = False
+                vert.prev = None
 
     def _get_adj_vertex(self, v_from):
         """
@@ -87,32 +91,36 @@ class SimpleGraph:
     def DepthFirstSearch(self, v_from, v_to):
         self._reset_vertices_hit()
         return self._depth_first_search(v_from, v_to, [])
-        
-    def _make_min_path(self, v_to):
-        path_vertices = [self.vertex[v_to]]
-        index_prev = self.vertex[v_to].index_prev
-        while index_prev is not None:
-            path_vertices.insert(0, self.vertex[index_prev])
-            index_prev = self.vertex[index_prev].index_prev
-        return path_vertices
-        
-    def _breafth_first_search(self, v_from, v_to):
-        adj_vert_indexes = list(filter(
+
+    def _get_adj_vert_indexes(self, v_from):
+        return list(filter(
             lambda v: self.IsEdge(v_from, v) and not self.vertex[v].hit,
             list(range(self.max_vertex))
         ))
-        for v in adj_vert_indexes:
-            if v == v_to:
-                self.vertex[v_to].index_prev = v_from
-                return self._make_min_path(v_to)
-            self.vertex[v].hit = True
-            self.queue.put(self.vertex[v])
-            self.vertex[v].index_prev = v_from
+
+    def _make_breadth_path(self, v_to):
+        path_vertices = [self.vertex[v_to]]
+        prev_index = self.vertex[v_to].prev
+        while prev_index is not None:
+            path_vertices.insert(0, self.vertex[prev_index])
+            prev_index = self.vertex[prev_index].prev
+        return path_vertices
+
+    def _breadth_first_search(self, v_from, v_to):
+        for vert_index in self._get_adj_vert_indexes(v_from):
+            if vert_index == v_to:
+                self.vertex[v_to].prev = v_from
+                return self._make_breadth_path(v_to)
+            self.vertex[vert_index].hit = True
+            self.queue.put(vert_index)
+            self.vertex[vert_index].prev = v_from
         if self.queue.qsize() == 0:
             return []
-        return self._breafth_first_search(self.queue.get().index, v_to)
+        return self._breadth_first_search(self.queue.get(), v_to)
 
     def BreadthFirstSearch(self, v_from, v_to):
         self._reset_vertices_hit()
+        self.queue = queue.Queue()
         self.vertex[v_from].hit = True
-        return self._breafth_first_search(v_from, v_to)
+
+        return self._breadth_first_search(v_from, v_to)
