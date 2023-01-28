@@ -122,5 +122,39 @@ class SimpleGraph:
         self._reset_vertices_hit()
         self.queue = queue.Queue()
         self.vertex[v_from].hit = True
-
         return self._breadth_first_search(v_from, v_to)
+
+    def _is_weak_vertex(self, v):
+        adj_vertices = self._get_adj_vert_indexes(v)
+        if len(adj_vertices) < 2:
+            return True
+        return not any([
+            self.IsEdge(adj_vertices[i], adj_vertices[j])
+            for i in range(len(adj_vertices) - 1)
+            for j in range(i + 1, len(adj_vertices))
+        ])
+
+    def WeakVertices(self):
+        result = []
+        for v in range(self.max_vertex):
+            if self._is_weak_vertex(v):
+                result.append(self.vertex[v])
+        return result
+
+
+# sgraph = SimpleGraph(9)
+# for i in range(9):
+#     sgraph.AddVertex(i)
+# sgraph.AddEdge(0, 1)
+# sgraph.AddEdge(0, 3)
+# sgraph.AddEdge(0, 2)
+# sgraph.AddEdge(2, 1)
+# sgraph.AddEdge(2, 3)
+# sgraph.AddEdge(4, 1)
+# sgraph.AddEdge(5, 4)
+# sgraph.AddEdge(5, 2)
+# sgraph.AddEdge(5, 6)
+# sgraph.AddEdge(5, 7)
+# sgraph.AddEdge(6, 7)
+# sgraph.AddEdge(7, 8)
+# sgraph.WeakVertices()

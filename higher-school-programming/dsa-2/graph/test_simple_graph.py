@@ -1,4 +1,6 @@
 import unittest
+from unittest import TestCase
+
 from simple_graph import SimpleGraph, Vertex
 
 
@@ -316,6 +318,26 @@ class TestSimpleGraph(unittest.TestCase):
 
         self.graph.RemoveEdge(3, 4)
         self.assertEqual([], self.graph.BreadthFirstSearch(1, 5))
+
+    def test_weak_vertices(self):
+        sgraph = SimpleGraph(9)
+        for i in range(9):
+            sgraph.AddVertex(i)
+        sgraph.AddEdge(0, 1)
+        sgraph.AddEdge(0, 3)
+        sgraph.AddEdge(0, 2)
+        sgraph.AddEdge(2, 1)
+        sgraph.AddEdge(2, 3)
+        sgraph.AddEdge(4, 1)
+        sgraph.AddEdge(5, 4)
+        sgraph.AddEdge(5, 2)
+        sgraph.AddEdge(5, 6)
+        sgraph.AddEdge(5, 7)
+        sgraph.AddEdge(6, 7)
+        sgraph.AddEdge(7, 8)
+        self.assertListEqual(
+            sgraph.WeakVertices(), [sgraph.vertex[4], sgraph.vertex[8]]
+        )
 
 
 if __name__ == '__main__':
