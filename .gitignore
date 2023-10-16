@@ -190,3 +190,5 @@ include/*
 lib/*
 bin/*
 test/test_runner
+
+CMakeLists.txt

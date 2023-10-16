@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(
     algorithms_datastructures
-    codewars/cpp/josefus_survivor.cpp
+    codewars/cpp/factorial_decomposition.cpp
+    unit_test_framework/unit_test_framework.h
 )
+
 target_include_directories(
     algorithms_datastructures
     PRIVATE
