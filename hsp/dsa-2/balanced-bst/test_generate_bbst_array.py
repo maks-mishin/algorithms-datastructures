@@ -8,7 +8,7 @@ class TestGenerateBBSTArray(unittest.TestCase):
     def test_empty_array(self):
         test_list = []
         balanced_list = GenerateBBSTArray(test_list)
-        self.assertEqual(balanced_list, None)
+        self.assertIsNone(balanced_list)
 
     def test_get_balanced_array_depth_0(self):
         test_list = list(range(1, 2))

@@ -2,7 +2,7 @@ import random
 import unittest
 from string import ascii_letters
 
-from tasks.native_cache import NativeCache
+from native_cache import NativeCache
 
 
 def random_string():

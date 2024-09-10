@@ -117,7 +117,7 @@ class TestBST(unittest.TestCase):
             bst.AddKeyValue(i, i)
 
         for i in random_list:
-            self.assertTrue(i == bst.FindNodeByKey(i).Node.NodeKey)
+            self.assertEqual(i, bst.FindNodeByKey(i).Node.NodeKey)
             self.assertTrue(bst.FindNodeByKey(i).NodeHasKey)
 
         bst = BST(None)

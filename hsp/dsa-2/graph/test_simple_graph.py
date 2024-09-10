@@ -93,7 +93,7 @@ class TestSimpleGraph(unittest.TestCase):
         )
         self.assertEqual(graph.vertex[0].Value, 0)
         graph.RemoveVertex(0)
-        self.assertEqual(graph.vertex[0], None)
+        self.assertIsNone(graph.vertex[0])
 
     def test_remove_vertex_with_edges(self):
         graph = add_edges_to_small_graph(make_small_graph())

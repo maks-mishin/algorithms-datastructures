@@ -2,7 +2,7 @@ import time
 import unittest
 from random import randint
 
-from tasks.power_set import PowerSet
+from power_set import PowerSet
 
 
 class TestPowerSet(unittest.TestCase):

@@ -1,6 +1,6 @@
-from tasks.bidirect_list_dummy_nodes import DoublyLinkedList
-from tasks.bidirect_linked_list import Node, LinkedList2
-from tasks.linked_list import LinkedList
+from bidirect_list_dummy_nodes import DoublyLinkedList
+from bidirect_linked_list import Node, LinkedList2
+from linked_list import LinkedList
 
 
 def print_bidirectional_list_dummy(s_list: DoublyLinkedList):

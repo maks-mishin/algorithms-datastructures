@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.hash_table import HashTable
+from hash_table import HashTable
 
 
 class TestHashTable(unittest.TestCase):
@@ -46,14 +46,14 @@ class TestHashTable(unittest.TestCase):
 
     def test_hash_fun_1(self):
         table = HashTable(17, 3)
-        self.assertTrue(table.hash_fun("aaa") < table.size)
-        self.assertTrue(
-            table.hash_fun("aaaagadgadgadgadfgergerge43534525") < table.size)
-        self.assertTrue(table.hash_fun(
-            "aaaagadgasdgfdg4dgadgadfgergerge43534525") < table.size)
-        self.assertTrue(table.hash_fun("534525") < table.size)
-        self.assertTrue(table.hash_fun("z") < table.size)
-        self.assertTrue(table.hash_fun("b") < table.size)
+        self.assertLess(table.hash_fun("aaa"), table.size)
+        self.assertLess(
+            table.hash_fun("aaaagadgadgadgadfgergerge43534525"), table.size)
+        self.assertLess(table.hash_fun(
+            "aaaagadgasdgfdg4dgadgadfgergerge43534525"), table.size)
+        self.assertLess(table.hash_fun("534525"), table.size)
+        self.assertLess(table.hash_fun("z"), table.size)
+        self.assertLess(table.hash_fun("b"), table.size)
 
     def test_seek_slot_1(self):
         table = HashTable(7, 3)
@@ -66,7 +66,7 @@ class TestHashTable(unittest.TestCase):
         table.slots[6] = "a"
         self.assertEqual(table.seek_slot("b"), 4)
         table.slots[4] = "a"
-        self.assertEqual(table.seek_slot("b"), None)
+        self.assertIsNone(table.seek_slot("b"))
 
         table = HashTable(9, 3)
         table.slots[0] = "a"

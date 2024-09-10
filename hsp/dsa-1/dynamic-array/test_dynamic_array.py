@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.dynamic_array import DynArray
+from dynamic_array import DynArray
 
 
 class TestDynamicArray(unittest.TestCase):

@@ -1,7 +1,7 @@
 from random import randint
 import unittest
 
-from tasks.ordered_list import OrderedList, OrderedListString
+from ordered_list import OrderedList, OrderedListString
 
 
 class TestOrderedList(unittest.TestCase):

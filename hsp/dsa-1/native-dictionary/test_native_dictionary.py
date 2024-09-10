@@ -1,19 +1,19 @@
 import unittest
 
-from tasks.native_dictionary import NativeDictionary
+from native_dictionary import NativeDictionary
 
 
 class TestNativeDictionary(unittest.TestCase):
     def test_hash_fun(self):
         table = NativeDictionary(17)
-        self.assertTrue(table.hash_fun("aaa") < table.size)
-        self.assertTrue(
-            table.hash_fun("aaaagadgadgadgadfgergerge43534525") < table.size)
-        self.assertTrue(table.hash_fun(
-            "aaaagadgasdgfdg4dgadgadfgergerge43534525") < table.size)
-        self.assertTrue(table.hash_fun("534525") < table.size)
-        self.assertTrue(table.hash_fun("z") < table.size)
-        self.assertTrue(table.hash_fun("b") < table.size)
+        self.assertLess(table.hash_fun("aaa"), table.size)
+        self.assertLess(
+            table.hash_fun("aaaagadgadgadgadfgergerge43534525"), table.size)
+        self.assertLess(table.hash_fun(
+            "aaaagadgasdgfdg4dgadgadfgergerge43534525"), table.size)
+        self.assertLess(table.hash_fun("534525"), table.size)
+        self.assertLess(table.hash_fun("z"), table.size)
+        self.assertLess(table.hash_fun("b"), table.size)
         # collision
         # print(table.hash_fun("z"))
         # print(table.hash_fun("434525"))
@@ -37,7 +37,7 @@ class TestNativeDictionary(unittest.TestCase):
         self.assertTrue(table.is_key("a"))
         self.assertTrue(table.is_key("b"))
         self.assertTrue(table.is_key("c"))
-        self.assertEqual(table.put("a", "z"), None)
+        self.assertIsNone(table.put("a", "z"))
 
     def test_get(self):
         table = NativeDictionary(3)
@@ -50,7 +50,7 @@ class TestNativeDictionary(unittest.TestCase):
 
         table.put("a", "abba")
         self.assertEqual(table.get("a"), "abba")
-        self.assertEqual(table.get("z"), None)
+        self.assertIsNone(table.get("z"))
 
 
 if __name__ == '__main__':

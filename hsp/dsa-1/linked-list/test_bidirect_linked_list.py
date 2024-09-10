@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.bidirect_linked_list import Node, LinkedList2
+from bidirect_linked_list import Node, LinkedList2
 from test_linked_list import make_list_from_linked_list
 
 

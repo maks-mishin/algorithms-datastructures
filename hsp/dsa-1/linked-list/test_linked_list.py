@@ -1,7 +1,7 @@
 import unittest
 
-from tasks.linked_list import LinkedList, Node
-from tasks.sum_linked_lists import sum_linked_lists
+from linked_list import LinkedList, Node
+from sum_linked_lists import sum_linked_lists
 
 
 def make_list_from_linked_list(s_list) -> list:
@@ -134,7 +134,7 @@ class TestSumTwoLists(unittest.TestCase):
         s_list2.add_in_tail(Node(10))
         s_list2.add_in_tail(Node(34))
 
-        self.assertEqual(sum_linked_lists(s_list1, s_list2), None)
+        self.assertIsNone(sum_linked_lists(s_list1, s_list2))
 
 
 if __name__ == '__main__':

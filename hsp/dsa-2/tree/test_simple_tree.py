@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.simple_tree import SimpleTreeNode, SimpleTree
+from simple_tree import SimpleTreeNode, SimpleTree
 
 
 class TestSimpleTree(unittest.TestCase):
@@ -46,15 +46,15 @@ class TestSimpleTree(unittest.TestCase):
         self.assertEqual(tree.LeafCount(), 1)
 
     def test_add_child(self):
-        rootNode = SimpleTreeNode(0, None)
-        tree = SimpleTree(root=rootNode)
-        addNode = SimpleTreeNode(12, rootNode)
-        tree.AddChild(rootNode, addNode)
+        root_node = SimpleTreeNode(0, None)
+        tree = SimpleTree(root=root_node)
+        add_node = SimpleTreeNode(12, root_node)
+        tree.AddChild(root_node, add_node)
         self.assertEqual(tree.Count(), 2)
         self.assertEqual(tree.LeafCount(), 1)
-        self.assertIn(addNode, rootNode.Children)
-        self.assertEqual(addNode.Parent, rootNode)
-        self.assertEqual(addNode.Level, rootNode.Level + 1)
+        self.assertIn(add_node, root_node.Children)
+        self.assertEqual(add_node.Parent, root_node)
+        self.assertEqual(add_node.Level, root_node.Level + 1)
 
     def test_delete_node(self):
         self.tree.DeleteNode(self.node_4)
@@ -63,8 +63,8 @@ class TestSimpleTree(unittest.TestCase):
         )
 
     def test_get_all_nodes(self):
-        allNodes = self.tree.GetAllNodes()
-        self.assertIn(self.node_4, allNodes)
+        all_nodes = self.tree.GetAllNodes()
+        self.assertIn(self.node_4, all_nodes)
 
     def test_find_nodes_by_value(self):
         node_4 = SimpleTreeNode(4, None)

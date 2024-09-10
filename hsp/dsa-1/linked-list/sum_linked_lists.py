@@ -1,4 +1,4 @@
-from .linked_list import Node, LinkedList
+from linked_list import Node, LinkedList
 
 
 def sum_linked_lists(s_list1: LinkedList, s_list2: LinkedList):

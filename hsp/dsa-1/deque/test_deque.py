@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.deque import Node, Deque
+from deque import Node, Deque
 
 
 def check_elem_in_deque(deq: Deque, val) -> bool:

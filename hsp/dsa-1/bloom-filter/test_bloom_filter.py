@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.bloom_filter import BloomFilter
+from bloom_filter import BloomFilter
 
 
 class TestBloomFilter(unittest.TestCase):

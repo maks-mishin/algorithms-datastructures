@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.bst_array import aBST
+from bst_array import aBST
 
 
 class TestABST(unittest.TestCase):

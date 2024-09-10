@@ -1,6 +1,6 @@
 import unittest
 
-from tasks.bidirect_list_dummy_nodes import Node, DoublyLinkedList
+from bidirect_list_dummy_nodes import Node, DoublyLinkedList
 
 
 def make_list_from_linked_list(s_list: DoublyLinkedList):
@@ -20,8 +20,8 @@ class TestLinkedListDummy(unittest.TestCase):
         self.assertIsNone(s_list.tail.Value)
         self.assertIsNone(s_list.head.prev)
         self.assertIsNone(s_list.tail.next)
-        self.assertTrue(s_list.head.next == s_list.tail)
-        self.assertTrue(s_list.tail.prev == s_list.head)
+        self.assertEqual(s_list.head.next, s_list.tail)
+        self.assertEqual(s_list.tail.prev, s_list.head)
 
     def test_add_in_tail(self):
         s_list = DoublyLinkedList()

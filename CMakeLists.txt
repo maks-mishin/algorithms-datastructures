@@ -4,13 +4,13 @@ project(algorithms_datastructures)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(
-    algorithms_datastructures
-    codewars/cpp/factorial_decomposition.cpp
+    main
+    main.cpp
     unit_test_framework/unit_test_framework.h
 )
 
 target_include_directories(
-    algorithms_datastructures
+    main
     PRIVATE
     unit_test_framework
 )
